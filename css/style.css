@@ -13,7 +13,7 @@ body {
 .navbar {
     display: flex;
     align-items: center;
-    position: sticky; /* para que me acompanie en la pagina al scrollear, junto a top 0 */
+    position: sticky; /* Para que me acompanie en la pagina al scrollear, junto a top 0 */
     top: 0;
     background-color: #4cb68f;
     padding: 10px 20px;
@@ -52,16 +52,32 @@ body {
     max-width: 800px;
     margin: 20px auto;
     padding: 30px 0px 30px;
+    opacity: 0;
+    /* Animacion para mostrar las imagenes, ya que tardan algo en cargar al inicio */
+    animation: fadeIn 2s linear forwards;
 }
 
-.img-container>img{
-    transition: transform 0.8s ease;  
+@keyframes fadeIn {
+    /*keyframe de la animacion fadeIn */
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
-.img-container img:hover{
-    filter: brightness(1.08); /* Ajusta el brillo */
+.img-container>img {
+    transition: transform 0.8s ease;
+}
+
+.img-container img:hover {
+    /* Aplica filtro brillo */
+    filter: brightness(1.08);
     transform: scale(1.150);
-    z-index: 1; /* Siempre por delante al resto de las imagenes al animarse */
+    /* Siempre por delante al resto de las imagenes al animarse */
+    z-index: 1;
     cursor: pointer;
 }
 
