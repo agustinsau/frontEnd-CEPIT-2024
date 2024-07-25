@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 5vh 15vh 5vh 15vh;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    position: sticky; /* para que me acompanie en la pagina al scrollear, junto a top 0 */
+    top: 0;
+    background-color: #4cb68f;
+    padding: 10px 20px;
+    z-index: 2; /* Siempre por delante a todo en la pagina */
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+.navbar a:hover {
+    background-color: #3aa07b;
+    border-radius: 6px;
+}
+
+.navbar .brand {
+    font-size: 26px;
+}
+
+.navbar .nav-elements {
+    display: flex;
+}
+
+.navbar .nav-elements a {
+    margin-left: 20px;
+}
+
+/* Container Imagenes Home */
+
+.img-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px 0px 30px;
+}
+
+.img-container>img{
+    transition: transform 0.8s ease;  
+}
+
+.img-container img:hover{
+    filter: brightness(1.08); /* Ajusta el brillo */
+    transform: scale(1.150);
+    z-index: 1; /* Siempre por delante al resto de las imagenes al animarse */
+    cursor: pointer;
+}
+
+.img-container img {
+    width: 100%;
+    height: 27vh;
+    /* object-fit: cover; usar para que la imagen se adapte al tamano del viewport*/
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Tabla informacion supermercado Home */
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.info-table th,
+.info-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.info-table th {
+    background-color: #4cb68f;
+    color: black;
+}
+
+.info-table tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.info-table .label {
+    font-weight: bold;
+    color: #555;
+}
+
+.info-table .td-value {
+    color: black;
+}
