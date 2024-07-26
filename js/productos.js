@@ -1,14 +1,14 @@
 const comestiblesDiv = document.getElementById("comestibles-list");
 const limpiezaDiv = document.getElementById("limpieza-list");
 
-
+//sumar las dos listas en una? y acceder tipo productos.ListaComestibles, productos.ListaLimpieza y asi
 const listaComestibles = [
     {
       "id": "c1",
       "nombre": "Leche Entera",
       "descripcion": "Leche entera de vaca. 1 litro.",
       "stock": 50,
-      "precio": 0.99,
+      "precio": 1000,
       "image": "./images/productos/comestibles/arroz.png"
     },
     {
@@ -16,7 +16,7 @@ const listaComestibles = [
       "nombre": "Arroz Gallo",
       "descripcion": "Arroz Gallito que no se pega. 1 kg.",
       "stock": 30,
-      "precio": 1.5,
+      "precio": 3800,
       "image": "./images/productos/comestibles/arroz.png"
     },
     {
@@ -24,7 +24,7 @@ const listaComestibles = [
       "nombre": "Huevos Orgánicos",
       "descripcion": "Huevos orgánicos, docena.",
       "stock": 20,
-      "precio": 2.75,
+      "precio": 3000,
       "image": "./images/productos/comestibles/arroz.png"
     },
     {
@@ -32,7 +32,7 @@ const listaComestibles = [
       "nombre": "Pan Integral",
       "descripcion": "Hecho con harina de trigo entero.",
       "stock": 20,
-      "precio": 1.5,
+      "precio": 1800,
       "image": "./images/productos/comestibles/arroz.png"
     },
     {
@@ -40,7 +40,7 @@ const listaComestibles = [
       "nombre": "Aceite de Oliva",
       "descripcion": "Aceite de oliva virgen extra, 500 ml.",
       "stock": 25,
-      "precio": 4.99,
+      "precio": 12000,
       "image": "./images/productos/comestibles/arroz.png"
     },
     {
@@ -48,7 +48,7 @@ const listaComestibles = [
       "nombre": "Paty Fiesta",
       "descripcion": "Pack de 4 hamburguesas.",
       "stock": 20,
-      "precio": 3.5,
+      "precio": 10000,
       "image": "./images/productos/comestibles/arroz.png"
     }
 ];
@@ -98,6 +98,17 @@ const listaLimpieza = [
     }
 ];
 
+//LLAMADOS DE FUNCIONES///////////////////////////////
+
+// Crear Lista Dinamica de Productos
+createProducts(listaComestibles, comestiblesDiv);
+createProducts(listaLimpieza, limpiezaDiv);
+
+// Listeners botones de compra
+escucharBtnsCompra();
+
+/////////////////////////////////////////////////////
+
 function createImage(imagen, nombre){
     let img = document.createElement('img');
     img.setAttribute('src', imagen);
@@ -105,15 +116,16 @@ function createImage(imagen, nombre){
   return img;
 }
 
-function createLi(textField, text){
+function createLi(field, text){
     let li = document.createElement('li');
-    let texto = document.createTextNode(`${textField}: ${text}`);
+    let texto = document.createTextNode(`${field}: ${text}`);
     li.appendChild(texto);
   return li;
 }
 
-function createInput(stock){
+function createInput(stock, id){
     let input = document.createElement('input');
+    input.setAttribute('data-id', id);
     input.setAttribute('type', 'number');
     input.setAttribute('value', '0');
     input.setAttribute('min', '0');
@@ -125,6 +137,7 @@ function createButton(id){
     let button = document.createElement('button');
     button.setAttribute('type', 'button');  
     button.setAttribute('id', id); 
+    button.setAttribute('class', 'btn-comprar');
     button.textContent = 'Comprar';
   return button;
 }
@@ -142,17 +155,78 @@ function createProducts(productsList, divProductos){
       ul.appendChild(createLi('Descripción', product.descripcion));
       ul.appendChild(createLi('Stock', product.stock));
       ul.appendChild(createLi('Precio', product.precio));
+
+      //li.setAttribute('data-id', id); UN SPAN CON DATA ID ESPECIFICO PARA TOCAR EL STOCK?
       
       prodCard.appendChild(createImage(product.image, product.nombre));
       prodCard.appendChild(ul);
-      prodCard.appendChild(createInput(product.stock));
+      prodCard.appendChild(createInput(product.stock, product.id));
       prodCard.appendChild(createButton(product.id));
   
       divProductos.appendChild(prodCard);
     });
 };
 
-createProducts(listaComestibles, comestiblesDiv);
-createProducts(listaLimpieza, limpiezaDiv);
+
+// Logica y listeners para cada boton de compra
+
+function escucharBtnsCompra(){
+  const comprarBtns = document.querySelectorAll('.btn-comprar');
+  //console.log(comprarBtns)
+
+  comprarBtns.forEach(btn => {
+    
+    btn.addEventListener('click', () => {
+      console.log('btn apretado con id '+ btn.id);
+
+      //capturar el input mas cercano al evento?
+      let input = document.querySelector(`input[data-id='${btn.id}']`);
+
+      let stock = input.max;
+      let quantity = input.value;
+
+      if((quantity > 0) && (quantity <= stock)){
+        
+        console.log('stock ' + stock +' cantidad '+ quantity);
+
+        sumarAlCarrito(btn.id, quantity);
+        //actualizarStock(btn.id, quantity);
+        input.value = 0; // Vuelvo el valor del input a 0
+
+      } else {
+        alert("Ingrese una cantidad valida.");
+      }
+
+    })
+  });
+};
 
 
+// Carrito de Compras
+
+const pCarrito = document.getElementById('tot-carrito');
+
+function buscarProdPorId(prodList, id) {
+  return prodList.find(product => product.id === id); // Le especifico que con que campo comparar para saber si lo encuentra o no
+}
+
+function sumarAlCarrito(id, quantity) {
+  let product = buscarProdPorId(listaComestibles, id);
+
+  if (product) { // Si lo encuentra
+    
+    let totCompra = quantity * product.precio;
+    let totCarrito = parseInt(pCarrito.innerText);
+    pCarrito.innerText = totCarrito + totCompra;
+
+  } else {
+    console.log(`Producto con ID ${productId} no encontrado`);
+  }
+
+}
+
+// Stock Productos
+
+function actualizarStock(prodId, quantity){
+  let liStock = document.querySelector(`li[data-id='${prodId}']`);
+}

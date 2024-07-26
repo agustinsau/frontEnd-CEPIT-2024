@@ -13,13 +13,13 @@ body {
 .navbar {
     display: flex;
     align-items: center;
-    position: sticky;
     /* Para que me acompanie en la pagina al scrollear, junto a top 0 */
+    position: sticky;
     top: 0;
     background-color: #4cb68f;
     padding: 10px 20px;
-    z-index: 2;
     /* Siempre por delante a todo en la pagina */
+    z-index: 2;
 }
 
 .navbar a {
@@ -60,8 +60,7 @@ body {
 }
 
 @keyframes fadeIn {
-
-    /*keyframe de la animacion fadeIn */
+    /* keyframe de la animacion fadeIn */
     from {
         opacity: 0;
     }
@@ -79,17 +78,17 @@ body {
     /* Aplica filtro brillo */
     filter: brightness(1.08);
     transform: scale(1.150);
-    /* Siempre por delante al resto de las imagenes al animarse */
-    z-index: 1;
     cursor: pointer;
+    /* Siempre por delante al resto de las imagenes al pasar el mouse */
+    z-index: 1;
 }
 
 .img-container img {
     width: 100%;
     height: 27vh;
-    /* object-fit: cover; usar para que la imagen se adapte al tamano del viewport*/
     border-radius: 6px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    /* object-fit: cover; usar para que la imagen se adapte al tamano del viewport*/
 }
 
 /* Tabla informacion supermercado Home */
