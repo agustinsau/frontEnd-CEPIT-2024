@@ -1,7 +1,6 @@
 const comestiblesDiv = document.getElementById("comestibles-list");
 const limpiezaDiv = document.getElementById("limpieza-list");
 
-//sumar las dos listas en una? y acceder tipo productos.ListaComestibles, productos.ListaLimpieza y asi
 const listaComestibles = [
     {
       "id": "c1",
@@ -55,6 +54,7 @@ const listaComestibles = [
 
 const listaLimpieza = [
     {
+        "id": "l1",
         "nombre": "Detergente Líquido",
         "descripcion": "Detergente líquido para ropa, 2 litros.",
         "stock": 25,
@@ -62,6 +62,7 @@ const listaLimpieza = [
         "image": ""
     },
     {
+        "id": "l2",
         "nombre": "Lavavajillas",
         "descripcion": "Lavavajillas en gel, 750 ml.",
         "stock": 40,
@@ -69,6 +70,7 @@ const listaLimpieza = [
         "image": ""
     },
     {
+        "id": "l3",
         "nombre": "Friegasuelos",
         "descripcion": "Friegasuelos perfumado, 1.5 litros.",
         "stock": 20,
@@ -76,6 +78,7 @@ const listaLimpieza = [
         "image": ""
     },
     {
+        "id": "l4",
         "nombre": "Limpiacristales",
         "descripcion": "Limpiacristales con amoníaco, 500 ml.",
         "stock": 30,
@@ -83,6 +86,7 @@ const listaLimpieza = [
         "image": ""
     },
     {
+        "id": "l5",
         "nombre": "Jabón de Manos",
         "descripcion": "Jabón de manos antibacteriano, 500 ml.",
         "stock": 50,
@@ -90,6 +94,7 @@ const listaLimpieza = [
         "image": ""
     },
     {
+        "id": "l6",
         "nombre": "Suavizante de Ropa",
         "descripcion": "Suavizante para ropa, 2 litros.",
         "stock": 20,
@@ -98,16 +103,20 @@ const listaLimpieza = [
     }
 ];
 
-//LLAMADOS DE FUNCIONES///////////////////////////////
+// Productos => 0: comestibles, 1: limpieza
+const productos = [listaComestibles, listaLimpieza];
+
+//LLAMADOS DE FUNCIONES//
 
 // Crear Lista Dinamica de Productos
-createProducts(listaComestibles, comestiblesDiv);
-createProducts(listaLimpieza, limpiezaDiv);
+createProducts(productos[0], comestiblesDiv);
+createProducts(productos[1], limpiezaDiv);
 
 // Listeners botones de compra
 escucharBtnsCompra();
 
-/////////////////////////////////////////////////////
+
+// Funciones Creacion Elementos
 
 function createImage(imagen, nombre){
     let img = document.createElement('img');
@@ -155,7 +164,6 @@ function createButton(id){
   return button;
 }
 
-
 //parametros: lista tipo producto, contenedor a guardar la lista
 function createProducts(productsList, divProductos){
     productsList.forEach(product =>{
@@ -198,12 +206,10 @@ function escucharBtnsCompra(){
       let stock = parseInt(stockSpan.textContent);
 
       if((quantity > 0) && (quantity <= stock)){
-        
-        console.log('stock ' + stock +' cantidad '+ quantity);
 
         sumarAlCarrito(btn.id, quantity);
         actualizarStock(stockSpan, quantity);
-
+        
         input.value = 0; // Luego de comprar, el valor del input vuelve a 0
 
       } else {
@@ -219,12 +225,22 @@ function escucharBtnsCompra(){
 
 const pCarrito = document.getElementById('tot-carrito');
 
-function buscarProdPorId(prodList, id) {
-  return prodList.find(product => product.id === id); // Le especifico que con que campo comparar para saber si lo encuentra o no
+function buscarProdPorId(id) { 
+  let product;
+
+  for (let i = 0; i < productos.length; i++){
+    product = productos[i].find(product => product.id === id); // Le especifico que con que campo comparar para saber si lo encuentra o no
+
+    if (product){
+      return product;
+    }
+  } 
+
+  return product
 }
 
 function sumarAlCarrito(id, quantity) {
-  let product = buscarProdPorId(listaComestibles, id);
+  let product = buscarProdPorId(id);
 
   if (product) { // Si lo encuentra
     
@@ -233,7 +249,7 @@ function sumarAlCarrito(id, quantity) {
     pCarrito.innerText = totCarrito + totCompra;
 
   } else {
-    console.log(`Producto con ID ${productId} no encontrado`);
+    console.log(`Producto con ID ${id} no encontrado`);
   }
 
 }
@@ -243,4 +259,5 @@ function sumarAlCarrito(id, quantity) {
 function actualizarStock(stockSpan, quantity){
   let nuevoStock = parseInt(stockSpan.textContent) - quantity;
   stockSpan.textContent = nuevoStock;
+  console.log('stock ' + stockSpan.textContent +' cantidad '+ quantity);
 }
