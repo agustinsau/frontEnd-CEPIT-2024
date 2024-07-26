@@ -1,9 +1,10 @@
-let comestiblesLi = document.getElementById("comestibles-list");
-
+const comestiblesDiv = document.getElementById("comestibles-list");
+const limpiezaDiv = document.getElementById("limpieza-list");
 
 
 const listaComestibles = [
     {
+      "id": "c1",
       "nombre": "Leche Entera",
       "descripcion": "Leche entera de vaca. 1 litro.",
       "stock": 50,
@@ -11,6 +12,7 @@ const listaComestibles = [
       "image": "./images/productos/comestibles/arroz.png"
     },
     {
+      "id": "c2",
       "nombre": "Arroz Gallo",
       "descripcion": "Arroz Gallito que no se pega. 1 kg.",
       "stock": 30,
@@ -18,6 +20,7 @@ const listaComestibles = [
       "image": "./images/productos/comestibles/arroz.png"
     },
     {
+      "id": "c3",
       "nombre": "Huevos Orgánicos",
       "descripcion": "Huevos orgánicos, docena.",
       "stock": 20,
@@ -25,6 +28,7 @@ const listaComestibles = [
       "image": "./images/productos/comestibles/arroz.png"
     },
     {
+      "id": "c4",
       "nombre": "Pan Integral",
       "descripcion": "Hecho con harina de trigo entero.",
       "stock": 20,
@@ -32,6 +36,7 @@ const listaComestibles = [
       "image": "./images/productos/comestibles/arroz.png"
     },
     {
+      "id": "c5",
       "nombre": "Aceite de Oliva",
       "descripcion": "Aceite de oliva virgen extra, 500 ml.",
       "stock": 25,
@@ -39,6 +44,7 @@ const listaComestibles = [
       "image": "./images/productos/comestibles/arroz.png"
     },
     {
+      "id": "c6",
       "nombre": "Paty Fiesta",
       "descripcion": "Pack de 4 hamburguesas.",
       "stock": 20,
@@ -92,61 +98,61 @@ const listaLimpieza = [
     }
 ];
 
-function createProduct(){
-    console.log('entro al func')
-    listaComestibles.forEach(product =>{
+function createImage(imagen, nombre){
+    let img = document.createElement('img');
+    img.setAttribute('src', imagen);
+    img.setAttribute('alt', nombre);
+  return img;
+}
 
-        let prodCard = document.createElement('div');
-        prodCard.setAttribute('class', 'card');
-    
-        let img = document.createElement('img');
-        img.setAttribute('src', product.image);
-        img.setAttribute('alt', product.nombre);
-        //img.setAttribute("class", clase);
-    
-        let ul = document.createElement('ul');
-    
-        let liNombre = document.createElement('li');
-        let texto = document.createTextNode(`Nombre: ${product.nombre}`);
-        liNombre.appendChild(texto);
-    
-        let liDescripcion = document.createElement('li');
-        texto = document.createTextNode(`Descripción: ${product.descripcion}`);
-        liDescripcion.appendChild(texto);
-    
-        let liStock = document.createElement('li');
-        texto = document.createTextNode(`Stock: ${product.stock}`);
-        liStock.appendChild(texto);
-    
-        let liPrecio = document.createElement('li');
-        texto = document.createTextNode(`Precio: ${product.precio}`);
-        liPrecio.appendChild(texto);
-    
-        ul.appendChild(liNombre);
-        ul.appendChild(liDescripcion);
-        ul.appendChild(liStock);
-        ul.appendChild(liPrecio);
-    
-        let input = document.createElement('input');
-        input.setAttribute('type', 'number');
-        input.setAttribute('value', '0');
-        input.setAttribute('min', '0');
-        input.setAttribute('max', product.stock);
-    
-        let button = document.createElement('button');
-        button.setAttribute('type', 'button');  
-        button.textContent = 'Comprar';
-        
-    
-        prodCard.appendChild(img);
-        prodCard.appendChild(ul);
-        prodCard.appendChild(input);
-        prodCard.appendChild(button);
-    
-        comestiblesLi.appendChild(prodCard);
+function createLi(textField, text){
+    let li = document.createElement('li');
+    let texto = document.createTextNode(`${textField}: ${text}`);
+    li.appendChild(texto);
+  return li;
+}
+
+function createInput(stock){
+    let input = document.createElement('input');
+    input.setAttribute('type', 'number');
+    input.setAttribute('value', '0');
+    input.setAttribute('min', '0');
+    input.setAttribute('max', stock);
+  return input;
+}
+
+function createButton(id){
+    let button = document.createElement('button');
+    button.setAttribute('type', 'button');  
+    button.setAttribute('id', id); 
+    button.textContent = 'Comprar';
+  return button;
+}
+
+//parametros: lista tipo producto, contenedor a guardar la lista
+function createProducts(productsList, divProductos){
+    productsList.forEach(product =>{
+
+      let prodCard = document.createElement('div');
+      prodCard.setAttribute('class', 'card');
+  
+      let ul = document.createElement('ul');
+  
+      ul.appendChild(createLi('Nombre', product.nombre));
+      ul.appendChild(createLi('Descripción', product.descripcion));
+      ul.appendChild(createLi('Stock', product.stock));
+      ul.appendChild(createLi('Precio', product.precio));
+      
+      prodCard.appendChild(createImage(product.image, product.nombre));
+      prodCard.appendChild(ul);
+      prodCard.appendChild(createInput(product.stock));
+      prodCard.appendChild(createButton(product.id));
+  
+      divProductos.appendChild(prodCard);
     });
 };
 
-createProduct();
+createProducts(listaComestibles, comestiblesDiv);
+createProducts(listaLimpieza, limpiezaDiv);
 
 
