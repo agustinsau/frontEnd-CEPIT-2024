@@ -123,6 +123,19 @@ function createLi(field, text){
   return li;
 }
 
+function createLiWithSpan(field, value, dataId) {
+    let li = document.createElement('li');
+    li.textContent = `${field}: `;
+
+    let span = document.createElement('span');
+
+    span.textContent = value;
+    span.setAttribute('data-id', dataId);
+
+    li.appendChild(span);
+  return li;
+}
+
 function createInput(stock, id){
     let input = document.createElement('input');
     input.setAttribute('data-id', id);
@@ -142,6 +155,7 @@ function createButton(id){
   return button;
 }
 
+
 //parametros: lista tipo producto, contenedor a guardar la lista
 function createProducts(productsList, divProductos){
     productsList.forEach(product =>{
@@ -153,10 +167,8 @@ function createProducts(productsList, divProductos){
   
       ul.appendChild(createLi('Nombre', product.nombre));
       ul.appendChild(createLi('Descripción', product.descripcion));
-      ul.appendChild(createLi('Stock', product.stock));
+      ul.appendChild(createLiWithSpan('Stock', product.stock, product.id)); // Este li posee un span para modificar facilmente el stock luego
       ul.appendChild(createLi('Precio', product.precio));
-
-      //li.setAttribute('data-id', id); UN SPAN CON DATA ID ESPECIFICO PARA TOCAR EL STOCK?
       
       prodCard.appendChild(createImage(product.image, product.nombre));
       prodCard.appendChild(ul);
@@ -172,7 +184,6 @@ function createProducts(productsList, divProductos){
 
 function escucharBtnsCompra(){
   const comprarBtns = document.querySelectorAll('.btn-comprar');
-  //console.log(comprarBtns)
 
   comprarBtns.forEach(btn => {
     
@@ -181,17 +192,19 @@ function escucharBtnsCompra(){
 
       //capturar el input mas cercano al evento?
       let input = document.querySelector(`input[data-id='${btn.id}']`);
-
-      let stock = input.max;
+      let stockSpan = document.querySelector(`span[data-id='${btn.id}']`);
+      
       let quantity = input.value;
+      let stock = parseInt(stockSpan.textContent);
 
       if((quantity > 0) && (quantity <= stock)){
         
         console.log('stock ' + stock +' cantidad '+ quantity);
 
         sumarAlCarrito(btn.id, quantity);
-        //actualizarStock(btn.id, quantity);
-        input.value = 0; // Vuelvo el valor del input a 0
+        actualizarStock(stockSpan, quantity);
+
+        input.value = 0; // Luego de comprar, el valor del input vuelve a 0
 
       } else {
         alert("Ingrese una cantidad valida.");
@@ -227,6 +240,7 @@ function sumarAlCarrito(id, quantity) {
 
 // Stock Productos
 
-function actualizarStock(prodId, quantity){
-  let liStock = document.querySelector(`li[data-id='${prodId}']`);
+function actualizarStock(stockSpan, quantity){
+  let nuevoStock = parseInt(stockSpan.textContent) - quantity;
+  stockSpan.textContent = nuevoStock;
 }
