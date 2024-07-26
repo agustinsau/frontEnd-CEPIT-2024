@@ -13,11 +13,13 @@ body {
 .navbar {
     display: flex;
     align-items: center;
-    position: sticky; /* Para que me acompanie en la pagina al scrollear, junto a top 0 */
+    position: sticky;
+    /* Para que me acompanie en la pagina al scrollear, junto a top 0 */
     top: 0;
     background-color: #4cb68f;
     padding: 10px 20px;
-    z-index: 2; /* Siempre por delante a todo en la pagina */
+    z-index: 2;
+    /* Siempre por delante a todo en la pagina */
 }
 
 .navbar a {
@@ -58,6 +60,7 @@ body {
 }
 
 @keyframes fadeIn {
+
     /*keyframe de la animacion fadeIn */
     from {
         opacity: 0;
@@ -122,3 +125,60 @@ body {
 .info-table .td-value {
     color: black;
 }
+
+/* Product Card */
+
+.card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.15);
+    margin: 30px;
+    padding: 25px;
+    width: 350px;
+    text-align: center;
+}
+
+.card img {
+    max-width: 100%;
+    height: 200px;
+    border-radius: 8px 8px 0 0;
+}
+
+.card ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card li {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.card input {
+    width: 60px;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.card button {
+    background-color: #4cb68f;
+    color: white;
+    padding: 11px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.card button:hover {
+    background-color: #3a8c6b;
+}
+
+.prods-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+  }
