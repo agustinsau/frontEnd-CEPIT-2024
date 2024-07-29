@@ -28,12 +28,28 @@
         </div>
     </section>
 
-    <section>
-        <div >
+    <section id="carrito" class="modal carrito">
+        <p id="cruz-modal"><strong>X</strong></p>
+        <div class="modal-contenedor">
             <h2>Carrito de Compras</h2>
-            <p id="tot-carrito">0</p>
+            <ul id="carrito-items"></ul>
+            <h4>Total</h4>
+            <p>$<span id="tot-carrito">0</span> </p>
+            <button type="button" id="btn-pagar-carrito">Pagar</button>
         </div>
     </section>
+
+    <dialog id="metodos-pago" class="modal pagos">
+        <div class="modal-contenedor">
+            <h2>modal</h2>
+            <p>asda</p>
+            <form method="dialog">
+
+            </form>
+            
+            <button id="btn-cerrar-modal">Salir</button>
+        </div>
+    </dialog>
     
     <script src="js/productos.js"></script>
 </body>

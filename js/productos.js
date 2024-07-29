@@ -8,7 +8,7 @@ const listaComestibles = [
       "descripcion": "Leche entera de vaca. 1 litro.",
       "stock": 50,
       "precio": 1000,
-      "image": "./images/productos/comestibles/arroz.png"
+      "image": "./resources/images/productos/comestibles/arroz.png"
     },
     {
       "id": "c2",
@@ -16,7 +16,7 @@ const listaComestibles = [
       "descripcion": "Arroz Gallito que no se pega. 1 kg.",
       "stock": 30,
       "precio": 3800,
-      "image": "./images/productos/comestibles/arroz.png"
+      "image": "./resources/images/productos/comestibles/arroz.png"
     },
     {
       "id": "c3",
@@ -24,7 +24,7 @@ const listaComestibles = [
       "descripcion": "Huevos orgánicos, docena.",
       "stock": 20,
       "precio": 3000,
-      "image": "./images/productos/comestibles/arroz.png"
+      "image": "./resources/images/productos/comestibles/arroz.png"
     },
     {
       "id": "c4",
@@ -32,7 +32,7 @@ const listaComestibles = [
       "descripcion": "Hecho con harina de trigo entero.",
       "stock": 20,
       "precio": 1800,
-      "image": "./images/productos/comestibles/arroz.png"
+      "image": "./resources/images/productos/comestibles/arroz.png"
     },
     {
       "id": "c5",
@@ -40,7 +40,7 @@ const listaComestibles = [
       "descripcion": "Aceite de oliva virgen extra, 500 ml.",
       "stock": 25,
       "precio": 12000,
-      "image": "./images/productos/comestibles/arroz.png"
+      "image": "./resources/images/productos/comestibles/arroz.png"
     },
     {
       "id": "c6",
@@ -48,7 +48,7 @@ const listaComestibles = [
       "descripcion": "Pack de 4 hamburguesas.",
       "stock": 20,
       "precio": 10000,
-      "image": "./images/productos/comestibles/arroz.png"
+      "image": "./resources/images/productos/comestibles/arroz.png"
     }
 ];
 
@@ -127,14 +127,14 @@ function createImage(imagen, nombre){
 
 function createLi(field, text){
     let li = document.createElement('li');
-    let texto = document.createTextNode(`${field}: ${text}`);
+    let texto = document.createTextNode(`${field} ${text}`);
     li.appendChild(texto);
   return li;
 }
 
 function createLiWithSpan(field, value, dataId) {
     let li = document.createElement('li');
-    li.textContent = `${field}: `;
+    li.textContent = `${field} `;
 
     let span = document.createElement('span');
 
@@ -173,10 +173,10 @@ function createProducts(productsList, divProductos){
   
       let ul = document.createElement('ul');
   
-      ul.appendChild(createLi('Nombre', product.nombre));
-      ul.appendChild(createLi('Descripción', product.descripcion));
-      ul.appendChild(createLiWithSpan('Stock', product.stock, product.id)); // Este li posee un span para modificar facilmente el stock luego
-      ul.appendChild(createLi('Precio', product.precio));
+      ul.appendChild(createLi('Nombre:', product.nombre));
+      ul.appendChild(createLi('Descripción:', product.descripcion));
+      ul.appendChild(createLiWithSpan('Stock:', product.stock, product.id)); // Este li posee un span para modificar facilmente el stock luego
+      ul.appendChild(createLi('Precio: $', product.precio));
       
       prodCard.appendChild(createImage(product.image, product.nombre));
       prodCard.appendChild(ul);
@@ -202,7 +202,7 @@ function escucharBtnsCompra(){
       let input = document.querySelector(`input[data-id='${btn.id}']`);
       let stockSpan = document.querySelector(`span[data-id='${btn.id}']`);
       
-      let quantity = input.value;
+      let quantity = parseInt(input.value);
       let stock = parseInt(stockSpan.textContent);
 
       if((quantity > 0) && (quantity <= stock)){
@@ -211,6 +211,8 @@ function escucharBtnsCompra(){
         actualizarStock(stockSpan, quantity);
         
         input.value = 0; // Luego de comprar, el valor del input vuelve a 0
+
+        carrito.classList.add('show');
 
       } else {
         alert("Ingrese una cantidad valida.");
@@ -221,7 +223,16 @@ function escucharBtnsCompra(){
 };
 
 
+// Stock Productos
+
+function actualizarStock(stockSpan, quantity){
+  let nuevoStock = parseInt(stockSpan.textContent) - quantity;
+  stockSpan.textContent = nuevoStock;
+  console.log('stock ' + stockSpan.textContent +' cantidad '+ quantity);
+}
+
 // Carrito de Compras
+const carrito = document.getElementById('carrito');
 
 const pCarrito = document.getElementById('tot-carrito');
 
@@ -235,29 +246,35 @@ function buscarProdPorId(id) {
       return product;
     }
   } 
-
   return product
 }
 
 function sumarAlCarrito(id, quantity) {
   let product = buscarProdPorId(id);
-
+  
   if (product) { // Si lo encuentra
     
     let totCompra = quantity * product.precio;
     let totCarrito = parseInt(pCarrito.innerText);
     pCarrito.innerText = totCarrito + totCompra;
-
+    
   } else {
     console.log(`Producto con ID ${id} no encontrado`);
   }
-
+  
 }
 
-// Stock Productos
+//Modal Metodo de Pago
 
-function actualizarStock(stockSpan, quantity){
-  let nuevoStock = parseInt(stockSpan.textContent) - quantity;
-  stockSpan.textContent = nuevoStock;
-  console.log('stock ' + stockSpan.textContent +' cantidad '+ quantity);
-}
+const btnAbrirModal = document.getElementById('btn-pagar-carrito');
+const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+const metodosPago = document.getElementById('metodos-pago');
+
+btnAbrirModal.addEventListener('click', () => {
+  metodosPago.showModal();
+  metodosPago.classList.add('show');
+});
+
+btnCerrarModal.addEventListener('click', () => {
+  metodosPago.close();
+});

@@ -7,16 +7,152 @@
     <title>Contacto</title>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="brand">AhorroManía</div>
-        <div class="nav-elements">
-            <a href="index.html">Inicio</a>
-            <a href="productos.html">Productos</a>
-            <a href="contacto.html">Contacto</a>
-        </div>
-    </nav>
+  <nav class="navbar">
+      <div class="brand">AhorroManía</div>
+      <div class="nav-elements">
+          <a href="index.html">Inicio</a>
+          <a href="productos.html">Productos</a>
+          <a href="contacto.html">Contacto</a>
+      </div>
+  </nav>
 
+  <section class="contact-section">
+    <div class="contact-form">
+        <h2>Formulario de Contacto</h2>
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono">
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" rows="10" required></textarea>
+            </div>
+            <button type="submit" id="enviar">Enviar</button>
+        </form>
+    </div>
+    <div class="contact-info">
+        <h2>Datos de Contacto</h2>
+        <p><strong>Dirección:</strong> C/ Jacinto Benavente, 2A, 28232 Las Rozas, Madrid, España</p>
+        <p><strong>Teléfono:</strong> +34 912 345 678</p>
+        <p><strong>Email:</strong> contacto@ahorromania.com</p>
+        <p><strong>Horario:</strong> Lunes a Viernes, 9:00 - 18:00</p>
+    </div>
+</section>
+    <!-- <section class="container about-section">
+      <div class="grid-container">
+          <div class="text-block">
+              <p>AhorroManía es una compañía española que opera también en Argentina, Brasil y Portugal. Pertenece al sector de la distribución alimentaria, productos de hogar y cuidado personal.</p>
+          </div>
+          <div class="image-block">
+              <img src="./resources/images/limones.jpg" alt="Imagen 1">
+          </div>
+          <div class="image-block">
+              <img src="./resources/images/gondolas.jpg" alt="Imagen 2">
+          </div>
+          <div class="text-block">
+              <p>Fundada en 1979, abrió su primera tienda en Madrid bajo la fórmula comercial de tienda de descuento. Este modelo de negocio está basado en una política de reducción de precios mediante la disminución de costes, simplificando el establecimiento y su gestión.</p>
+          </div>
+          <div class="text-block">
+              <p>La compañía lleva un estricto control de costes gracias a una eficiente cadena logística. Su política de comunicación comercial se basa en las campañas en los medios de comunicación, así como folletos periódicos en los que se destacan los productos en oferta. Posee un sistema de franquicias que permite a particulares operar una tienda AhorroManía tras realizar una determinada inversión.</p>
+          </div>
+          <div class="image-block">
+              <img src="./resources/images/carrito.jpg" alt="Imagen 3">
+          </div>
+          <div class="image-block">
+              <img src="./resources/images/bebida.jpg" alt="Imagen 4">
+          </div>
+          <div class="text-block">
+              <p>A cierre de 2023, tenía 5402 tiendas (de las cuales 2937 eran franquicias) repartidas entre España, Argentina, Brasil y Portugal. Su número de empleados era de 28.500.3</p>
+          </div>
+      </div>
+  </section>
+
+    <style>
+        #dte-weekend-adventures .Index-page-content  {
+          padding-left: 0;
+          padding-right: 0;
+        }
+        .marquee {
+          width: 100%;
+          margin: 0 auto;
+          overflow: hidden;
+          white-space: nowrap;
+          margin-top: 17px;
+        }
+        .marquee-content {
+          display: inline-block;
+          margin-top: 5px;
+          animation: marquee 15s linear infinite;
+        }
+        .item-collection-1 {
+          position: relative;
+          left: 0%;
+          animation: swap 15s linear infinite;
+        }
+        @keyframes swap {
+          0%, 50% {
+            left: 0%;
+          }
+          50.01%,
+          100% {
+            left: 100%;
+          }
+        }
+        .marquee-content:hover {
+          animation-play-state: paused
+        }
+        .item1 {
+          display: inline-block;
+          height: 70px;
+          width: 140px;
+          background: cyan;
+          vertical-align: top;
+          margin-left: 15px;
+        }
+        .item2 {
+          display: inline-block;
+          height: 70px;
+          width: 100px;
+          background: magenta;
+          vertical-align: top;
+          margin-left: 15px;
+          line-height: 14px;
+        }
+        /* Transition */
+        
+        @keyframes marquee {
+          0% {
+            transform: translateX(0)
+          }
+          100% {
+            transform: translateX(-100%)
+          }
+        }
+        </style>
+        <div class="marquee">
+        <div class="marquee-content">
+            <span class="item-collection-1"> Roman roads and marshmallows roasted on fire pits. Fairy tales on Snowdonia mountain trails. Bracing dips in lakes that reset. The office grind forgotten; the city air vanished.
+            </span>
+            <span class="item-collection-2"> Roman roads and marshmallows roasted on fire pits. Fairy tales on Snowdonia mountain trails. Bracing dips in lakes that reset. The office grind forgotten; the city air vanished.</span>
+        </div>
+        </div> -->
+      
     
-    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>   
+    <script src="js/contacto.js"></script>
 </body>
 </html>

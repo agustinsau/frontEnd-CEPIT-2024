@@ -1,5 +1,5 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
+body, html {
+    font-family: Roboto;
     margin: 0;
     padding: 0;
 }
@@ -13,11 +13,12 @@ body {
 .navbar {
     display: flex;
     align-items: center;
+    justify-content: center;
     /* Para que me acompanie en la pagina al scrollear, junto a top 0 */
     position: sticky;
     top: 0;
     background-color: #4cb68f;
-    padding: 10px 20px;
+    padding: 22px 20px;
     /* Siempre por delante a todo en la pagina */
     z-index: 2;
 }
@@ -43,6 +44,59 @@ body {
 
 .navbar .nav-elements a {
     margin-left: 20px;
+}
+
+/* Banner */
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 26vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 1px 12px #555;
+    text-align: center;
+}
+
+.banner-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 1;
+    padding-top: 10px;
+}
+
+.banner h1 {
+    font-size: 4.2em;
+    margin: 0;
+}
+
+.banner-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    color: white;
+    background-color: #4cb68f;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.banner-button:hover {
+    background-color: #399e73;
 }
 
 /* Container Imagenes Home */
@@ -130,17 +184,23 @@ body {
 .card {
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.15);
-    margin: 30px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+    margin: 15px 15px 10px 15px;
     padding: 25px;
-    width: 350px;
+    width: 370px;
     text-align: center;
 }
 
 .card img {
     max-width: 100%;
-    height: 200px;
+    height: 220px;
     border-radius: 8px 8px 0 0;
+    transition: transform 0.8s ease;
+}
+
+.card img:hover{
+    transform: scale(1.18);
+    cursor: pointer;
 }
 
 .card ul {
@@ -156,23 +216,24 @@ body {
 
 .card input {
     width: 60px;
-    padding: 10px;
+    padding: 12px;
     margin-right: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
 }
 
-.card button {
+button {
     background-color: #4cb68f;
     color: white;
-    padding: 11px 20px;
+    padding: 10px 18px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-size: medium;
 }
 
-.card button:hover {
+button:hover { /* .card button:hover, .btn-pagar:hover */
     background-color: #3a8c6b;
 }
 
@@ -181,4 +242,157 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-  }
+}
+
+/* Modales, Carrito / Metodos de Pago */
+
+.modal{
+    background-color: #fff;
+    border: 5px solid #4cb68f;;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modal-contenedor{
+    text-align: center;
+}
+
+.modal.show{
+    animation: fadeIn 1s linear forwards;
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#cruz-modal{
+    position: relative;
+    margin: -1px;
+}
+
+#cruz-modal:hover{
+    cursor: pointer;
+}
+
+/* Metodos de Pago */
+
+.pagos{
+    top: -62%;
+}
+
+#metodos-pago #cruz-modal{
+
+}
+
+/* Carrito de Compras */
+
+.carrito {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 25vh;
+    display: none;
+    opacity: 0
+}
+
+#carrito.show {
+    display: block;
+    animation: fadeIn 1s linear forwards;
+}
+
+#carrito h2 {
+    margin-top: 0;
+}
+
+#carrito #cruz-modal {
+    left: 24vh;
+}
+
+ /*   nosotros               */
+
+ .about-section {
+    padding: 20px;
+    
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    animation: fadeIn 1s linear forwards;
+}
+
+.text-block p {
+    margin: 0;
+}
+
+.image-block img {
+    width: 95%;
+    border-radius: 35px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.8s ease;
+}
+
+.image-block img:hover {
+    /* Aplica filtro brillo */
+    filter: brightness(1.05);
+    transform: scale(1.120);
+    cursor: pointer;
+    /* Siempre por delante al resto de las imagenes al pasar el mouse */
+    z-index: 1;
+}
+
+.img-container img {
+    width: 100%;
+    height: 27vh;
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    /* object-fit: cover; usar para que la imagen se adapte al tamano del viewport*/
+}
+
+/* Contacto */
+
+.contact-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form, .contact-info {
+    align-content: center;
+    padding: 20px;
+}
+
+.contact-info h2, .contact-form h2 {
+    color: #4cb68f;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
