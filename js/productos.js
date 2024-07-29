@@ -8,7 +8,8 @@ const listaComestibles = [
       "descripcion": "Leche entera de vaca. 1 litro.",
       "stock": 50,
       "precio": 1000,
-      "image": "./resources/images/productos/comestibles/arroz.png"
+      "image": "./resources/images/productos/comestibles/arroz.png",
+      "discount": 30
     },
     {
       "id": "c2",
@@ -16,7 +17,8 @@ const listaComestibles = [
       "descripcion": "Arroz Gallito que no se pega. 1 kg.",
       "stock": 30,
       "precio": 3800,
-      "image": "./resources/images/productos/comestibles/arroz.png"
+      "image": "./resources/images/productos/comestibles/arroz.png",
+      "discount": 0
     },
     {
       "id": "c3",
@@ -24,7 +26,8 @@ const listaComestibles = [
       "descripcion": "Huevos orgánicos, docena.",
       "stock": 20,
       "precio": 3000,
-      "image": "./resources/images/productos/comestibles/arroz.png"
+      "image": "./resources/images/productos/comestibles/arroz.png",
+      "discount": 0
     },
     {
       "id": "c4",
@@ -32,7 +35,8 @@ const listaComestibles = [
       "descripcion": "Hecho con harina de trigo entero.",
       "stock": 20,
       "precio": 1800,
-      "image": "./resources/images/productos/comestibles/arroz.png"
+      "image": "./resources/images/productos/comestibles/arroz.png",
+      "discount": 30
     },
     {
       "id": "c5",
@@ -40,7 +44,8 @@ const listaComestibles = [
       "descripcion": "Aceite de oliva virgen extra, 500 ml.",
       "stock": 25,
       "precio": 12000,
-      "image": "./resources/images/productos/comestibles/arroz.png"
+      "image": "./resources/images/productos/comestibles/arroz.png",
+      "discount": 0
     },
     {
       "id": "c6",
@@ -48,7 +53,8 @@ const listaComestibles = [
       "descripcion": "Pack de 4 hamburguesas.",
       "stock": 20,
       "precio": 10000,
-      "image": "./resources/images/productos/comestibles/arroz.png"
+      "image": "./resources/images/productos/comestibles/arroz.png",
+      "discount": 30
     }
 ];
 
@@ -118,10 +124,11 @@ escucharBtnsCompra();
 
 // Funciones Creacion Elementos
 
-function createImage(imagen, nombre){
+function createImage(imagen, nombre, clase){
     let img = document.createElement('img');
     img.setAttribute('src', imagen);
     img.setAttribute('alt', nombre);
+    img.setAttribute('class', clase);
   return img;
 }
 
@@ -164,27 +171,44 @@ function createButton(id){
   return button;
 }
 
-//parametros: lista tipo producto, contenedor a guardar la lista
 function createProducts(productsList, divProductos){
-    productsList.forEach(product =>{
+  productsList.forEach(product =>{
 
-      let prodCard = document.createElement('div');
-      prodCard.setAttribute('class', 'card');
-  
-      let ul = document.createElement('ul');
-  
-      ul.appendChild(createLi('Nombre:', product.nombre));
-      ul.appendChild(createLi('Descripción:', product.descripcion));
-      ul.appendChild(createLiWithSpan('Stock:', product.stock, product.id)); // Este li posee un span para modificar facilmente el stock luego
-      ul.appendChild(createLi('Precio: $', product.precio));
-      
-      prodCard.appendChild(createImage(product.image, product.nombre));
-      prodCard.appendChild(ul);
-      prodCard.appendChild(createInput(product.stock, product.id));
-      prodCard.appendChild(createButton(product.id));
-  
-      divProductos.appendChild(prodCard);
-    });
+    // Div para el card del producto
+    let prodCard = document.createElement('div');
+    prodCard.setAttribute('class', 'card');
+
+    // Div para la imagen del producto
+    let divImg = document.createElement('div');
+    divImg.setAttribute('class', 'prod-image-container');
+
+    divImg.appendChild(createImage(product.image, product.nombre, 'product-image'));
+
+    if(product.discount > 0){ //temporal, no escalable si hay mas descuentos
+      divImg.appendChild(createImage('./resources/images/productos/30off.png', 'discount badge', 'discount-badge'));
+    }
+
+    // Div para la informacion del producto
+    let divProdData = document.createElement('div');
+
+    let ul = document.createElement('ul');
+
+    ul.appendChild(createLi('Nombre:', product.nombre));
+    ul.appendChild(createLi('Descripción:', product.descripcion));
+    ul.appendChild(createLiWithSpan('Stock:', product.stock, product.id)); // Este li posee un span para modificar facilmente el stock luego
+    ul.appendChild(createLi('Precio: $', product.precio));
+
+    // Adhiero la lista al div prod data
+    divProdData.appendChild(ul);
+    
+    // Adhiero cada nodo al div Card
+    prodCard.appendChild(divImg);
+    prodCard.appendChild(divProdData);
+    prodCard.appendChild(createInput(product.stock, product.id));
+    prodCard.appendChild(createButton(product.id));
+
+    divProductos.appendChild(prodCard);
+  });
 };
 
 
