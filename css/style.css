@@ -217,6 +217,13 @@ body, html {
     width: 85px;
 }
 
+.price-discount{
+    text-decoration: line-through;
+    text-decoration-color: #399e73;
+    text-decoration-thickness: 4px;
+    padding-right: 5px;
+}
+
 .card ul {
     list-style-type: none;
     padding: 0;

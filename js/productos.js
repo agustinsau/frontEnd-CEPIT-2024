@@ -139,17 +139,33 @@ function createLi(field, text){
   return li;
 }
 
-function createLiWithSpan(field, value, dataId) {
+function createLiWithSpan(field, value, atributo, valorAtributo) {
     let li = document.createElement('li');
     li.textContent = `${field} `;
 
     let span = document.createElement('span');
 
     span.textContent = value;
-    span.setAttribute('data-id', dataId);
+    span.setAttribute(atributo, valorAtributo);
 
     li.appendChild(span);
   return li;
+}
+
+// Si tiene descuento el producto, agrega precio e imagen descuento, temporal no escalable si hay mas descuentos  
+function createPriceLi(descuento, precio){
+  if(descuento > 0){ 
+      let precioDescuento = precio - (precio * (descuento / 100));
+      let li = createLiWithSpan('Precio: $', precio, 'class', 'price-discount')
+      let spanPDescuento = document.createElement('span');
+
+      spanPDescuento.textContent = precioDescuento;
+      li.appendChild(spanPDescuento);
+    return li;
+    
+  } else {
+    return createLi('Precio: $', precio);
+  }  
 }
 
 function createInput(stock, id){
@@ -184,7 +200,8 @@ function createProducts(productsList, divProductos){
 
     divImg.appendChild(createImage(product.image, product.nombre, 'product-image'));
 
-    if(product.discount > 0){ //temporal, no escalable si hay mas descuentos
+    //Si el producto tiene descuento, crea la imagen de % OFF
+    if(product.discount > 0){
       divImg.appendChild(createImage('./resources/images/productos/30off.png', 'discount badge', 'discount-badge'));
     }
 
@@ -195,8 +212,8 @@ function createProducts(productsList, divProductos){
 
     ul.appendChild(createLi('Nombre:', product.nombre));
     ul.appendChild(createLi('Descripción:', product.descripcion));
-    ul.appendChild(createLiWithSpan('Stock:', product.stock, product.id)); // Este li posee un span para modificar facilmente el stock luego
-    ul.appendChild(createLi('Precio: $', product.precio));
+    ul.appendChild(createLiWithSpan('Stock:', product.stock, 'data-id', product.id)); // Este li posee un span para modificar datos en el interior facilmente
+    ul.appendChild(createPriceLi(product.discount, product.precio));
 
     // Adhiero la lista al div prod data
     divProdData.appendChild(ul);
@@ -238,6 +255,8 @@ function escucharBtnsCompra(){
 
         carrito.classList.add('show');
 
+        //AGREGAR FEEDBACK QUE SE AGREGO BIEN EL PRODUCTO AL CARRO
+
       } else {
         alert("Ingrese una cantidad valida.");
       }
@@ -252,8 +271,9 @@ function escucharBtnsCompra(){
 function actualizarStock(stockSpan, quantity){
   let nuevoStock = parseInt(stockSpan.textContent) - quantity;
   stockSpan.textContent = nuevoStock;
-  console.log('stock ' + stockSpan.textContent +' cantidad '+ quantity);
+  console.log('stock ' + stockSpan.textContent +' cantidad agregada '+ quantity);
 }
+
 
 // Carrito de Compras
 const carrito = document.getElementById('carrito');
@@ -273,19 +293,33 @@ function buscarProdPorId(id) {
   return product
 }
 
+function precioDescuento(precio, descuentoProd){
+    let descuento = precio * (descuentoProd / 100);
+    return (precio - descuento);
+}
+
+function calcularCompra(pDiscount, precio, cant){
+  if (pDiscount > 0){
+        let precioDesc = precioDescuento(precio, pDiscount) * cant;
+      return (precioDesc);
+
+    } else {
+      return (precio * cant);
+    }
+}
+
 function sumarAlCarrito(id, quantity) {
   let product = buscarProdPorId(id);
   
   if (product) { // Si lo encuentra
-    
-    let totCompra = quantity * product.precio;
+    let totCompra = calcularCompra(product.discount, product.precio, parseInt(quantity));
     let totCarrito = parseInt(pCarrito.innerText);
+
     pCarrito.innerText = totCarrito + totCompra;
     
   } else {
     console.log(`Producto con ID ${id} no encontrado`);
   }
-  
 }
 
 //Modal Metodo de Pago
