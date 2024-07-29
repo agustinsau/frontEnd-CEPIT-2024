@@ -360,9 +360,9 @@ button:hover { /* .card button:hover, .btn-pagar:hover */
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
-    background-color: white;
     border-radius: 10px;
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+    align-items: start;
 }
 
 .contact-form, .contact-info {
@@ -372,6 +372,10 @@ button:hover { /* .card button:hover, .btn-pagar:hover */
 
 .contact-info h2, .contact-form h2 {
     color: #4cb68f;
+}
+
+.contact-info img{
+    width: 100%;
 }
 
 .contact-form form {
