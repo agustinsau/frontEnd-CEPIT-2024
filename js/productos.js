@@ -8,7 +8,7 @@ const listaComestibles = [
       "descripcion": "Leche entera de vaca. 1 litro.",
       "stock": 50,
       "precio": 1000,
-      "image": "./resources/images/productos/comestibles/arroz.png",
+      "image": "../resources/images/productos/comestibles/arroz.png",
       "discount": 30
     },
     {
@@ -17,7 +17,7 @@ const listaComestibles = [
       "descripcion": "Arroz Gallito que no se pega. 1 kg.",
       "stock": 30,
       "precio": 3800,
-      "image": "./resources/images/productos/comestibles/arroz.png",
+      "image": "../resources/images/productos/comestibles/arroz.png",
       "discount": 0
     },
     {
@@ -26,7 +26,7 @@ const listaComestibles = [
       "descripcion": "Huevos orgánicos, docena.",
       "stock": 20,
       "precio": 3000,
-      "image": "./resources/images/productos/comestibles/arroz.png",
+      "image": "../resources/images/productos/comestibles/arroz.png",
       "discount": 0
     },
     {
@@ -35,7 +35,7 @@ const listaComestibles = [
       "descripcion": "Hecho con harina de trigo entero.",
       "stock": 20,
       "precio": 1800,
-      "image": "./resources/images/productos/comestibles/arroz.png",
+      "image": "../resources/images/productos/comestibles/arroz.png",
       "discount": 30
     },
     {
@@ -44,7 +44,7 @@ const listaComestibles = [
       "descripcion": "Aceite de oliva virgen extra, 500 ml.",
       "stock": 25,
       "precio": 12000,
-      "image": "./resources/images/productos/comestibles/arroz.png",
+      "image": "../resources/images/productos/comestibles/arroz.png",
       "discount": 0
     },
     {
@@ -53,7 +53,7 @@ const listaComestibles = [
       "descripcion": "Pack de 4 hamburguesas.",
       "stock": 20,
       "precio": 10000,
-      "image": "./resources/images/productos/comestibles/arroz.png",
+      "image": "../resources/images/productos/comestibles/arroz.png",
       "discount": 30
     }
 ];
@@ -202,7 +202,7 @@ function createProducts(productsList, divProductos){
 
     //Si el producto tiene descuento, crea la imagen de % OFF
     if(product.discount > 0){
-      divImg.appendChild(createImage('./resources/images/productos/30off.png', 'discount badge', 'discount-badge'));
+      divImg.appendChild(createImage('../resources/images/productos/30off.png', 'discount badge', 'discount-badge'));
     }
 
     // Div para la informacion del producto

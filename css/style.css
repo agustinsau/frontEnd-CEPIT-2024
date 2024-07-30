@@ -17,7 +17,7 @@ body, html {
     position: sticky;
     top: 0;
     background-color: #4cb68f;
-    padding: 10px 5rem;
+    padding: 5px 5rem;
     /* Siempre por delante a todo en la pagina */
     z-index: 2;
     align-items: center;
@@ -27,7 +27,7 @@ body, html {
 .navbar a {
     color: white;
     text-decoration: none;
-    padding: 15px 20px;
+    padding: 12px 20px;
 }
 
 .navbar a:hover {
@@ -57,7 +57,7 @@ body, html {
 .banner {
     position: relative;
     width: 100%;
-    height: 26vh;
+    height: 28vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -89,7 +89,7 @@ body, html {
 
 .banner-button {
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 28px;
     padding: 10px 20px;
     font-size: 1.2em;
     color: white;
