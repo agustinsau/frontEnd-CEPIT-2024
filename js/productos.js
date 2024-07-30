@@ -253,7 +253,10 @@ function escucharBtnsCompra(){
         
         input.value = 0; // Luego de comprar, el valor del input vuelve a 0
 
+        carrito.classList.remove('remove');
         carrito.classList.add('show');
+        //carrito.classList.toggle('show', 'remove')
+
 
         //AGREGAR FEEDBACK QUE SE AGREGO BIEN EL PRODUCTO AL CARRO
 
@@ -324,15 +327,91 @@ function sumarAlCarrito(id, quantity) {
 
 //Modal Metodo de Pago
 
-const btnAbrirModal = document.getElementById('btn-pagar-carrito');
-const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+const abrirModalPagos = document.getElementById('btn-pagar-carrito');
+const cerrarModalPagos = document.getElementById('btn-cerrar-modal');
 const metodosPago = document.getElementById('metodos-pago');
 
-btnAbrirModal.addEventListener('click', () => {
+abrirModalPagos.addEventListener('click', () => {
   metodosPago.showModal();
   metodosPago.classList.add('show');
+
+  carrito.classList.remove('show');
+  carrito.classList.add('remove');
 });
 
-btnCerrarModal.addEventListener('click', () => {
+document.addEventListener('DOMContentLoaded', function() {
+  // Al seleccionar metodo de pago, muestra el form correspondiente
+  document.getElementById('payment-method').addEventListener('change', selectedPaymentMethod);
+});
+
+
+// Recargos segun metodo de pago
+
+const recargoTransf = 0.05;
+const recargoTresCuotas = 0.08;
+const recargoSeisCuotas = 0.12;
+const recargoDoceCuotas = 0.21;
+
+function calcularCuotas(total){
+  let cantCuotas = parseInt(document.getElementById('cuotas-cant').value);
+  let interes, montoMensual;
+
+  if (cantCuotas === 3) {
+    interes = recargoTresCuotas; 
+  } else if (cantCuotas === 6) {
+    interes = recargoSeisCuotas; 
+  } else if (cantCuotas === 12) {
+    interes = recargoDoceCuotas; 
+  }
+  
+  montoMensual = (principal / cantCuotas) * (1 + interes);
+
+  return montoMensual;
+
+}
+
+function calculatePayment(pagoElegido){
+  let totalCarrito = parseInt(pCarrito.value);
+
+  switch (pagoElegido) {
+    case 'presencial':
+      return totalCarrito;
+
+    case 'transfer':
+      return (totalCarrito * (1 + recargoTransf)); //Recargo del 5% al pagar por transferencia
+
+    case 'credit-card': 
+      return calcularCuotas(totalCarrito);
+
+    default:
+      break;
+  }
+}
+
+function selectedPaymentMethod() {
+  //let totalAPagar = document.getElementById('totalPagoModal');
+  let metodoPago = document.getElementById('payment-method').value;
+
+  // Aseguro ocultar metodos de pago
+  document.querySelectorAll('.form-pago').forEach(form => form.classList.add('hidden'));
+
+  // Muestra el metodo de pago seleccionado
+  if (metodoPago) {
+    document.getElementById(`${metodoPago}-form`).classList.remove('hidden');
+    //totalAPagar.value = calculatePayment(metodoPago); //
+
+  } else {
+    console.log('metodo no encontrado');
+  }
+}
+
+function paymentMethodDefaults(){
+  document.getElementById('payment-method').value = 'select';
+  document.querySelectorAll('.form-pago').forEach(form => form.classList.add('hidden'));
+}
+
+cerrarModalPagos.addEventListener('click', () => {
+  paymentMethodDefaults();
   metodosPago.close();
+  
 });
