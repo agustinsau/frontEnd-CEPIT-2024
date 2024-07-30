@@ -12,21 +12,22 @@ body, html {
 
 .navbar {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    /* Para que me acompanie en la pagina al scrollear, junto a top 0 */
+    justify-content: space-around;
+    /* Para que me acompanie en la pagina al scrollear*/
     position: sticky;
     top: 0;
     background-color: #4cb68f;
-    padding: 22px 20px;
+    padding: 10px 5rem;
     /* Siempre por delante a todo en la pagina */
     z-index: 2;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .navbar a {
     color: white;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 15px 20px;
 }
 
 .navbar a:hover {
@@ -35,7 +36,12 @@ body, html {
 }
 
 .navbar .brand {
-    font-size: 26px;
+    transition: transform 0.5s ease;
+    width: 20rem;
+}
+
+.navbar .brand:hover{
+    transform: scale(1.1);
 }
 
 .navbar .nav-elements {
@@ -43,7 +49,7 @@ body, html {
 }
 
 .navbar .nav-elements a {
-    margin-left: 20px;
+    margin-right: 20px;
 }
 
 /* Banner */
@@ -243,8 +249,6 @@ body, html {
     border: 1px solid #ccc;
 }
 
-
-
 button {
     background-color: #4cb68f;
     color: white;
@@ -305,7 +309,7 @@ button:hover { /* .card button:hover, .btn-pagar:hover */
 }
 
 #metodos-pago #cruz-modal{
-
+ /* para la posicionn de la X en el modal pagos */
 }
 
 /* Carrito de Compras */
