@@ -330,18 +330,32 @@ function sumarAlCarrito(id, quantity) {
 const abrirModalPagos = document.getElementById('btn-pagar-carrito');
 const cerrarModalPagos = document.getElementById('btn-cerrar-modal');
 const metodosPago = document.getElementById('metodos-pago');
+const totalAPagar = document.getElementById('totalPagoModal');
 
 abrirModalPagos.addEventListener('click', () => {
   metodosPago.showModal();
+  metodosPago.classList.remove('remove');
   metodosPago.classList.add('show');
 
-  carrito.classList.remove('show');
-  carrito.classList.add('remove');
+  carrito.classList.replace('show', 'remove');
+
+  //Muestro total actual del carrito en el modal
+  totalAPagar.textContent = `$ ${pCarrito.textContent}`;
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+cerrarModalPagos.addEventListener('click', () => {
+  metodosPago.classList.replace('show', 'remove');
+  metodosPago.close();
+  paymentMethodsToDefaults();
+
+  
+});
+
+document.addEventListener('DOMContentLoaded', () => {
   // Al seleccionar metodo de pago, muestra el form correspondiente
   document.getElementById('payment-method').addEventListener('change', selectedPaymentMethod);
+  // Listener change de cantidad de cuotas
+  document.getElementById('cuotas-cant').addEventListener('change', mostrarPagoEnCuotas);
 });
 
 
@@ -352,9 +366,9 @@ const recargoTresCuotas = 0.08;
 const recargoSeisCuotas = 0.12;
 const recargoDoceCuotas = 0.21;
 
-function calcularCuotas(total){
-  let cantCuotas = parseInt(document.getElementById('cuotas-cant').value);
-  let interes, montoMensual;
+function calcularCuotas(cantCuotas){
+  let total = parseInt(pCarrito.textContent); 
+  let interes, montoCuota;
 
   if (cantCuotas === 3) {
     interes = recargoTresCuotas; 
@@ -364,24 +378,34 @@ function calcularCuotas(total){
     interes = recargoDoceCuotas; 
   }
   
-  montoMensual = (principal / cantCuotas) * (1 + interes);
+  montoCuota = (total / cantCuotas) * (1 + interes);
 
-  return montoMensual;
+  return montoCuota;
 
 }
 
-function calculatePayment(pagoElegido){
-  let totalCarrito = parseInt(pCarrito.value);
+function mostrarPagoEnCuotas(){
+  let cantCuotas = parseInt(document.getElementById('cuotas-cant').value);
+        
+  let montoCuota = calcularCuotas(cantCuotas);
 
-  switch (pagoElegido) {
+  //mostrar cant cuotas y monto por cuota en modal
+  totalAPagar.textContent = `$ ${parseInt(montoCuota)} `;
+}
+
+function processPayment(metodoPago){
+  let totalCarrito = parseInt(pCarrito.textContent);
+
+  switch (metodoPago) {
     case 'presencial':
       return totalCarrito;
 
     case 'transfer':
-      return (totalCarrito * (1 + recargoTransf)); //Recargo del 5% al pagar por transferencia
+      return (totalCarrito * (1 + recargoTransf)); 
 
     case 'credit-card': 
-      return calcularCuotas(totalCarrito);
+        mostrarPagoEnCuotas();
+      return totalCarrito;
 
     default:
       break;
@@ -389,8 +413,8 @@ function calculatePayment(pagoElegido){
 }
 
 function selectedPaymentMethod() {
-  //let totalAPagar = document.getElementById('totalPagoModal');
   let metodoPago = document.getElementById('payment-method').value;
+  console.log(metodoPago)
 
   // Aseguro ocultar metodos de pago
   document.querySelectorAll('.form-pago').forEach(form => form.classList.add('hidden'));
@@ -398,20 +422,17 @@ function selectedPaymentMethod() {
   // Muestra el metodo de pago seleccionado
   if (metodoPago) {
     document.getElementById(`${metodoPago}-form`).classList.remove('hidden');
-    //totalAPagar.value = calculatePayment(metodoPago); //
-
+    totalAPagar.textContent = `$ ${processPayment(metodoPago)}`; 
+    console.log(totalAPagar.innerText)
+    
   } else {
     console.log('metodo no encontrado');
   }
 }
 
-function paymentMethodDefaults(){
+function paymentMethodsToDefaults(){
   document.getElementById('payment-method').value = 'select';
+  document.getElementById('cuotas-cant').value = 'select';
   document.querySelectorAll('.form-pago').forEach(form => form.classList.add('hidden'));
 }
 
-cerrarModalPagos.addEventListener('click', () => {
-  paymentMethodDefaults();
-  metodosPago.close();
-  
-});

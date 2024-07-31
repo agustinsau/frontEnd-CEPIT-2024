@@ -298,19 +298,24 @@ button:hover { /* .card button:hover, .btn-pagar:hover */
 }
 
 .modal.show{
-    animation: fadeIn 0.5s linear forwards;
+    display: block;
+    animation: fadeIn 0.3s linear forwards;
+}
+
+.modal.remove {
+    animation: fadeOut 0.2s ease-out forwards;
 }
 
 .modal::backdrop {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-#cruz-modal{
+.cruz-modal{
     position: relative;
     margin: -1px;
 }
 
-#cruz-modal:hover{
+.cruz-modal:hover{
     cursor: pointer;
 }
 
@@ -320,7 +325,7 @@ button:hover { /* .card button:hover, .btn-pagar:hover */
     top: -62%;
 }
 
-#metodos-pago #cruz-modal{
+#metodos-pago .cruz-modal{
  /* para la posicionn de la X en el modal pagos */
 }
 
@@ -341,20 +346,11 @@ button:hover { /* .card button:hover, .btn-pagar:hover */
     /* opacity: 0 */
 }
 
-#carrito.show {
-    display: block;
-    animation: fadeIn 0.5s linear forwards;
-}
-
-#carrito.remove {
-    animation: fadeOut 0.5s ease-out forwards;;
-}
-
 #carrito h2 {
     margin-top: 0;
 }
 
-#carrito #cruz-modal {
+#carrito .cruz-modal {
     left: 24vh;
 }
 
