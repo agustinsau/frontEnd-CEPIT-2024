@@ -13,7 +13,7 @@ function guardarInformacion(n,a,e,t,m) {
     let fechaFormateada = `${fechaActual.toLocaleDateString()} - Hora: ${fechaActual.toLocaleTimeString()}`;
 
     // Contenido del txt
-    let contenidoForm = ` Nombre: ${n}\n Apellido: ${a}\n Telefono: ${e}\n Email: ${t}\n Su Mensaje: ${m}\n\n Fecha de Envio: ${fechaFormateada}`;
+    let contenidoForm = ` Nombre: ${n}\n Apellido: ${a}\n Email: ${e}\n Telefono: ${t}\n Su Mensaje: ${m}\n\n Fecha de Envio: ${fechaFormateada}`;
 
     let blob = new Blob([contenidoForm], { type: "text/plain;charset=utf-8" });
 
@@ -22,8 +22,8 @@ function guardarInformacion(n,a,e,t,m) {
 }
 
 //RegEx para verificar campos
-const telefonoPattern = /^[0-9]{10}$/; 
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const telefonoPattern = /^[0-9]{4,5}-[0-9]{6}$/;  //Formato permitido: 02284-123456 o 2284-123456
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //Debe contener si o si @ y .com
 
 function limpiarFormContacto(){
     nombre.value = '';
@@ -57,7 +57,6 @@ document.getElementById('enviar').addEventListener('click', (event) => {
         
         mensajeRespuesta.classList.replace('hidden','exito');
         mensajeRespuesta.classList.replace('error','exito');
-        //mensajeRespuesta.classList.add('exito');
         mensajeRespuesta.textContent = 'Formulario enviado con Exito!';
     }
 
