@@ -1,28 +1,64 @@
-let nombre = document.getElementById("nombre");
-let apellido = document.getElementById("apellido");
-let telefono = document.getElementById("telefono");
-let email = document.getElementById("email");
-let mensaje = document.getElementById("mensaje");
-let btnEnviarForm = document.getElementById("enviar");
+const nombre = document.getElementById('nombre');
+const apellido = document.getElementById('apellido');
+const email = document.getElementById('email');
+const telefono = document.getElementById('telefono');
+const mensaje = document.getElementById('mensaje');
+
+const mensajeRespuesta = document.getElementById('mensaje-respuesta');
+
 let informacion = [];
 
-btnEnviarForm.addEventListener("click", (e) => {
-    e.preventDefault(); // previene la accion del form de actualizar la pagina
-    informacion[0] = nombre.value;
-    informacion[1] = apellido.value;
-    informacion[2] = telefono.value;
-    informacion[3] = email.value;
-    informacion[4] = mensaje.value;
+function guardarInformacion(n,a,e,t,m) {
+    let fechaActual = new Date();
+    let fechaFormateada = `${fechaActual.toLocaleDateString()} - Hora: ${fechaActual.toLocaleTimeString()}`;
 
-    console.log(`Su nombre es ${informacion[0]} y su apellido es ${informacion[1]}`);
+    // Contenido del txt
+    let contenidoForm = ` Nombre: ${n}\n Apellido: ${a}\n Telefono: ${e}\n Email: ${t}\n Su Mensaje: ${m}\n\n Fecha de Envio: ${fechaFormateada}`;
 
-    let blob = new Blob([informacion], {type: "text/plain;charset=utf-8"}); // navegador
+    let blob = new Blob([contenidoForm], { type: "text/plain;charset=utf-8" });
 
     //Libreria FileSaver.js
-       saveAs(blob, "contact.txt");
+    saveAs(blob, "contact.txt");
+}
 
-       console.log(blob)
-})
+//RegEx para verificar campos
+const telefonoPattern = /^[0-9]{10}$/; 
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-//type="number" pattern="[0-9]{10}" validacion numero telefono
+function limpiarFormContacto(){
+    nombre.value = '';
+    apellido.value = '';
+    telefono.value = '';
+    email.value = '';
+    mensaje.value = '';
+}
 
+document.getElementById('enviar').addEventListener('click', (event) => {
+    event.preventDefault(); // Prevenir el envío del formulario
+
+    // Obtener valores de los campos
+    let n = nombre.value.trim();
+    let a = apellido.value.trim();
+    let e = email.value.trim();
+    let t = telefono.value.trim();
+    let m = mensaje.value.trim();
+
+    // Utiliza .test para probar las expresiones regulares
+    if (n === '' || a === '' || 
+            e === '' || !emailPattern.test(e) || 
+            t === '' || !telefonoPattern.test(t) || m === ''){
+
+        mensajeRespuesta.textContent = 'Por favor, verifique todos los campos antes de enviar.';
+        mensajeRespuesta.classList.replace('hidden', 'error');
+
+    } else {  
+        guardarInformacion(n,a,e,t,m);
+        limpiarFormContacto();
+        
+        mensajeRespuesta.classList.replace('hidden','exito');
+        mensajeRespuesta.classList.replace('error','exito');
+        //mensajeRespuesta.classList.add('exito');
+        mensajeRespuesta.textContent = 'Formulario enviado con Exito!';
+    }
+
+});

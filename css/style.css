@@ -299,11 +299,11 @@ button:hover { /* .card button:hover, .btn-pagar:hover */
 
 .modal.show{
     display: block;
-    animation: fadeIn 0.3s linear forwards;
+    animation: fadeIn 0.4s linear forwards;
 }
 
 .modal.remove {
-    animation: fadeOut 0.2s ease-out forwards;
+    animation: fadeOut 0.3s ease-out forwards;
 }
 
 .modal::backdrop {
@@ -445,6 +445,27 @@ button:hover { /* .card button:hover, .btn-pagar:hover */
     border-radius: 5px;
     box-sizing: border-box;
 }
+
+/* Mensaje de Envio Formulario */
+
+
+.mensaje{
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 0px;
+}
+
+.error {
+    color: red;
+    border: 2px solid red;
+}
+
+.exito {
+    color: #059048;
+    border: 2px solid #059048;  
+}
+
 
 
 
