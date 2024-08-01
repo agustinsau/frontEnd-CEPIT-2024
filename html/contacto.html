@@ -16,11 +16,18 @@
       </div>
   </nav>
 
+  <header class="banner">
+    <img id="banner-img" src="../resources/images/contacto.jpg" class="banner-img">
+    <div class="banner-content">
+        <h1>Contacto y Alertas</h1>
+    </div>
+</header>
+
   <section class="contact-section">
     <div class="contact-form">
-        <h2>Formulario de Contacto</h2>
+        <h1>Formulario de Contacto</h1>
         <p>Todos los campos son Obligatorios.</p>
-        <form action="#" method="POST">
+        <form action="#">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" onkeydown="return /[a-zA-Z]/i.test(event.key)" placeholder="Ingrese su nombre" required>
@@ -46,7 +53,7 @@
         </form>
     </div>
     <div class="contact-info">
-        <h2>Datos de Contacto</h2>
+        <h1>Datos de Contacto</h1>
         <div>
           <img src="../resources/images/maps.png" alt="">
         </div>
@@ -58,6 +65,55 @@
         </div>
         
     </div>
+    
+</section> 
+<section>
+  <div class="container">
+    <h1>Suscríbase a nuestras alertas por correo</h1>
+    <p>Para poder recibir alertas para inversionistas al correo electrónico, ingrese su dirección de e-mail en el campo a continuación y seleccione al menos una opción de alerta. Después de enviar su solicitud, recibirá un correo electrónico de activación en la dirección de correo solicitada. Debe hacer clic en el enlace de activación para completar su suscripción. Puede registrarse para obtener opciones de alerta adicionales en cualquier momento.
+
+      En Mallplaza, nos comprometemos a tratar sus datos con respeto y no compartiremos su información con terceros. Puede dar de baja cualquiera de las alertas para inversionistas a las que está suscrito visitando la sección "cancelar suscripción" a continuación. Si tiene algún problema con este proceso, comuníquese con nosotros para obtener más ayuda.
+
+      Al proporcionar su dirección de correo electrónico, está dando su consentimiento a Mallplaza para que le envíe las actualizaciones solicitadas de alertas por correo electrónico para inversionistas.
+
+      * Obligatorio
+    </p>
+
+    <div class="form-group">
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" placeholder="Ejemplo: ahorroMania@gmail.com" required>
+    
+      <label for="checkbox">Lista de Correos *</label>
+      <div class="checkbox-group">
+        <div>
+          <input type="checkbox" name="noticias" id="noticias">
+          <label for="noticias">Noticias</label>
+        </div>
+        <div>
+          <input type="checkbox" name="eventos" id="eventos">
+          <label for="eventos">Eventos</label>
+        </div>
+        <div>
+          <input type="checkbox" name="ofertas" id="ofertas">
+          <label for="ofertas">Ofertas</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+    Enviar
+    Desuscribirse de nuestras alertas
+    Para no recibir nuestra alertas por e-mail para inversionistas, ingrese su dirección de correo electrónico en el campo que aparece a continuación y será eliminado de TODAS las alertas a las que está suscrito. Después de enviar su correo electrónico, recibirá un correo de confirmación a la dirección solicitada. Debe hacer clic en el enlace de confirmación para completar la cancelación de su suscripción. Puede volver a registrarse para recibir alertas de inversionistas en el momento que desee.
+
+    * Obligatorio
+
+    Correo electrónico: *
+    Correo electrónico
+    Desuscribirse
+  </div>
 </section>
     <!-- <section class="container about-section">
       <div class="grid-container">

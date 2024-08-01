@@ -6,8 +6,6 @@ const mensaje = document.getElementById('mensaje');
 
 const mensajeRespuesta = document.getElementById('mensaje-respuesta');
 
-let informacion = [];
-
 function guardarInformacion(n,a,e,t,m) {
     let fechaActual = new Date();
     let fechaFormateada = `${fechaActual.toLocaleDateString()} - Hora: ${fechaActual.toLocaleTimeString()}`;
@@ -34,7 +32,7 @@ function limpiarFormContacto(){
 }
 
 document.getElementById('enviar').addEventListener('click', (event) => {
-    event.preventDefault(); // Prevenir el envío del formulario 
+    //event.preventDefault(); // Prevenir el envío del formulario 
 
     // Obtener valores de los campos
     let n = nombre.value.trim();

@@ -114,6 +114,8 @@ const productos = [listaComestibles, listaLimpieza];
 
 //LLAMADOS DE FUNCIONES//
 
+slowdownBanner();
+
 // Crear Lista Dinamica de Productos
 createProducts(productos[0], comestiblesDiv);
 createProducts(productos[1], limpiezaDiv);
@@ -434,5 +436,13 @@ function paymentMethodsToDefaults(){
   document.getElementById('payment-method').value = 'select';
   document.getElementById('cuotas-cant').value = 'select';
   document.querySelectorAll('.form-pago').forEach(form => form.classList.add('hidden'));
+}
+
+
+/* Banner Video */
+
+function slowdownBanner(){
+  const videoBanner = document.getElementById('banner-video');
+  videoBanner.playbackRate = 0.90;
 }
 
