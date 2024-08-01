@@ -322,7 +322,7 @@ button:hover { /* .card button:hover, .btn-pagar:hover */
 /* Metodos de Pago */
 
 .metodos-pago{
-    top: -62%;
+    top: -35%;
 }
 
 #metodos-pago .cruz-modal{
@@ -465,6 +465,91 @@ button:hover { /* .card button:hover, .btn-pagar:hover */
     color: #059048;
     border: 2px solid #059048;  
 }
+
+/* Footer */
+
+footer {
+    width: 100%;
+    bottom: 0;
+    /* background-color: #4cb68f;; */
+    color: #fff;
+    position: absolute;
+  }
+  
+  .footer-top {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+    background-color: #3aa07b;
+  }
+  
+  .footer-logo img {
+    height: 6vh;
+  }
+  
+  .footer-social {
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer-social h3 {
+    margin: 0;
+    margin-right: 10px;
+  }
+  
+  .social-links {
+    display: flex;
+  }
+  
+  .social-links a {
+    margin: 0 10px;
+    display: inline-block;
+  }
+  
+  .social-links img {
+    height: 45px;
+  }
+  
+  .footer-bottom {
+    background-color: #222;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .quick-links h3 {
+    margin-bottom: 10px;
+  }
+  
+  .quick-links ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .quick-links ul li {
+    margin-bottom: 5px;
+  }
+  
+  .quick-links ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .quick-links ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-info {
+    text-align: right;
+  }
+  
+  .footer-info p {
+    margin: 5px 0;
+  }
+  
 
 
 

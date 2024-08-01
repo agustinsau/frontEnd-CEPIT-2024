@@ -34,7 +34,7 @@ function limpiarFormContacto(){
 }
 
 document.getElementById('enviar').addEventListener('click', (event) => {
-    event.preventDefault(); // Prevenir el envío del formulario
+    event.preventDefault(); // Prevenir el envío del formulario 
 
     // Obtener valores de los campos
     let n = nombre.value.trim();
@@ -48,10 +48,13 @@ document.getElementById('enviar').addEventListener('click', (event) => {
             e === '' || !emailPattern.test(e) || 
             t === '' || !telefonoPattern.test(t) || m === ''){
 
-        mensajeRespuesta.textContent = 'Por favor, verifique todos los campos antes de enviar.';
-        mensajeRespuesta.classList.replace('hidden', 'error');
+        mensajeRespuesta.textContent = 'Por favor, verifique los campos antes de enviar.';
 
+        mensajeRespuesta.classList.replace('hidden', 'error');
+        mensajeRespuesta.classList.replace('exito', 'error');
+ 
     } else {  
+        
         guardarInformacion(n,a,e,t,m);
         limpiarFormContacto();
         

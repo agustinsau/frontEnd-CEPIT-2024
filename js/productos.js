@@ -325,12 +325,19 @@ function sumarAlCarrito(id, quantity) {
   }
 }
 
-//Modal Metodo de Pago
+//Funciones y Logica Metodos de Pago
 
 const abrirModalPagos = document.getElementById('btn-pagar-carrito');
 const cerrarModalPagos = document.getElementById('btn-cerrar-modal');
 const metodosPago = document.getElementById('metodos-pago');
 const totalAPagar = document.getElementById('totalPagoModal');
+
+// Recargos segun metodo de pago
+
+const recargoTransf = 0.05;
+const recargoTresCuotas = 0.08;
+const recargoSeisCuotas = 0.12;
+const recargoDoceCuotas = 0.21;
 
 abrirModalPagos.addEventListener('click', () => {
   metodosPago.showModal();
@@ -347,24 +354,16 @@ cerrarModalPagos.addEventListener('click', () => {
   metodosPago.classList.replace('show', 'remove');
   metodosPago.close();
   paymentMethodsToDefaults();
-
-  
 });
 
+// Listeners on change, luego de cargarse el documento
 document.addEventListener('DOMContentLoaded', () => {
   // Al seleccionar metodo de pago, muestra el form correspondiente
   document.getElementById('payment-method').addEventListener('change', selectedPaymentMethod);
+
   // Listener change de cantidad de cuotas
   document.getElementById('cuotas-cant').addEventListener('change', mostrarPagoEnCuotas);
 });
-
-
-// Recargos segun metodo de pago
-
-const recargoTransf = 0.05;
-const recargoTresCuotas = 0.08;
-const recargoSeisCuotas = 0.12;
-const recargoDoceCuotas = 0.21;
 
 function calcularCuotas(cantCuotas){
   let total = parseInt(pCarrito.textContent); 
@@ -390,6 +389,7 @@ function mostrarPagoEnCuotas(){
   let montoCuota = calcularCuotas(cantCuotas);
 
   //mostrar cant cuotas y monto por cuota en modal
+  
   totalAPagar.textContent = `$ ${parseInt(montoCuota)} `;
 }
 

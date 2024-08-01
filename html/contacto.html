@@ -8,7 +8,7 @@
 </head>
 <body>
   <nav class="navbar">
-      <div class="brand">AhorroManía</div>
+    <div><img class="brand" src="../resources/images/superLogo.png" alt="Logo Super"></div>
       <div class="nav-elements">
           <a href="../index.html">Inicio</a>
           <a href="productos.html">Productos</a>
@@ -19,26 +19,27 @@
   <section class="contact-section">
     <div class="contact-form">
         <h2>Formulario de Contacto</h2>
+        <p>Todos los campos son Obligatorios.</p>
         <form action="#" method="POST">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su Nombre" required>
+                <input type="text" id="nombre" name="nombre" onkeydown="return /[a-zA-Z]/i.test(event.key)" placeholder="Ingrese su nombre" required>
             </div>
             <div class="form-group">
                 <label for="apellido">Apellido:</label>
-                <input type="text" id="apellido" name="apellido" placeholder="Ingrese su Apellido" required>
+                <input type="text" id="apellido" name="apellido" onkeydown="return /[a-zA-Z]/i.test(event.key)" placeholder="Ingrese su apellido" required>
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Ingrese su Email. Ejemplo: miMail@gmail.com" required>
+                <input type="email" id="email" name="email" placeholder="Ejemplo: ahorroMania@gmail.com" required>
             </div>
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" placeholder="Ingrese su Telefono. Ejemplo: 2284-123456" required>
+                <input type="tel" id="telefono" name="telefono" placeholder="Ejemplo: 2284-123456" required>
             </div>
             <div class="form-group">
                 <label for="mensaje">Mensaje:</label>
-                <textarea id="mensaje" name="mensaje" rows="8" placeholder="Ingrese su Mensaje" required></textarea>
+                <textarea id="mensaje" name="mensaje" rows="8" placeholder="Ingrese su mensaje" required></textarea>
             </div>
             <div ><p id="mensaje-respuesta" class="mensaje hidden"></p></div>
             <button type="submit" id="enviar">Enviar</button>
@@ -157,7 +158,36 @@
         </div>
         </div> -->
       
-    
+        <footer>
+          <div class="footer-top">
+            <div class="footer-logo">
+              <img class="" src="../resources/images/superLogo.png" alt="Logo Super">
+            </div>
+            <div class="footer-social">
+              <h3>Encontranos en:</h3>
+              <div class="social-links">
+                <a href="#" target="_blank"><img src="../resources/images/social/face.png" alt="Facebook"></a>
+                <a href="#" target="_blank"><img src="../resources/images/social/ig.png" alt="Instagram"></a>
+                <a href="#" target="_blank"><img src="../resources/images/social/wasap.png" alt="Whatsapp"></a>
+                <a href="#" target="_blank"><img src="../resources/images/social/fbchat.png" alt="Facebook Chat"></a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <div class="quick-links">
+              <h3>Enlaces Rápidos</h3>
+              <ul>
+                <li><a href="#products">Inicio</a></li>
+                <li><a href="#products">Productos</a></li>
+                <li><a href="#contact-form">Formulario de contacto</a></li>
+              </ul>
+            </div>
+            <div class="footer-info">
+              <p>SuperMania</p>
+              <p>© 2024 SuperMania. - Todos los derechos reservados.</p>
+            </div>
+          </div>
+        </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>   
     <script src="../js/contacto.js"></script>
