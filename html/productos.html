@@ -61,10 +61,10 @@
 
     <dialog id="metodos-pago" class="modal metodos-pago">
         <div class="modal-contenedor">
-            <h1>Formulario de Pago</h1>
-            <label for="payment-method">Selecciona el método de pago:</label>
+            <h1>Métodos de Pago</h1>
+            <label for="payment-method">Selecciona tu método de pago preferido:</label>
             <select id="payment-method">
-                <option value="select" disabled selected>Seleccionar...</option>
+                <option value="select" disabled selected>Seleccionar</option>
                 <option value="presencial">Presencial</option>
                 <option value="transfer">Transferencia</option>
                 <option value="credit-card">Tarjeta de Crédito</option>
@@ -73,16 +73,24 @@
             <div>
                 <div id="presencial-form" class="form-pago hidden">
                     <h2>Pago Presencial</h2>
-                    <p>Dirígete a la caja para realizar el pago en efectivo.</p>
+                    <p>Dirígete a la sucursal mas cercana para realizar el pago en efectivo.</p>
+                    <p>Reservaremos tu pedido por 2 Horas.</p>
+                    <button id="btn-pagar-pres">Reservar Pedido</button>
                 </div>
             
                 <div id="transfer-form" class="form-pago hidden">
-                    <p>Transferencia</p>
+                    <h2>Pago por Transferencia</h2>
+                    <img src="" alt="Imagen Bancaria">
+                    <p><strong>Nombre Titular: </strong>Carlos Baratito</p>
+                    <p><strong>Numero de Cuenta: </strong>1234567890
+                    <p><strong>Entidad Bancaria: </strong>Banco Nacion </p>
+                    <p><strong>Numero de CBU: </strong>0987654321</p>
+                    <button id="btn-pagar-transf">Reservar Pedido</button>
                 </div>
             
                 <div id="credit-card-form" class="form-pago hidden">
                     <h2>Pago con Tarjeta de Crédito</h2>
-                    <form method="dialog">
+                    <form class="credit-card-form" method="dialog">
     
                         <label for="banco-tarjeta">Seleccione su Banco Operador</label>
                         <select id="banco-tarjeta">
@@ -91,29 +99,39 @@
                             <option value="santander">Santander</option>
                             <option value="banco-nacion">Banco Nacion</option>
                         </select>
-    
-                        <label for="card-number">Número de Tarjeta:</label>
-                        <input class="form-group" type="number" id="card-number" name="card-number">
                         
-                        <label for="card-name">Nombre en la Tarjeta:</label>
-                        <input class="form-group" type="text" id="card-name" name="card-name">
-                        
-                        <label for="expiry-date">Fecha de Expiración:</label>
-                        <input class="form-group" type="text" id="expiry-date" name="expiry-date" placeholder="MM/AA">
+                        <section class="datos-tarjeta">
+                            <div>
+                                <label for="card-number">Número de Tarjeta</label>
+                                <input class="form-group" type="number" id="card-number" name="card-number" placeholder="12345678">
+                            </div> 
+                            <div>
+                                <label for="card-name">Nombre en la Tarjeta</label>
+                                <input class="form-group" type="text" id="card-name" name="card-name" placeholder="Titular de la tarjeta" onkeydown="return /[a-zA-Z]/i.test(event.key)">
+                            </div>    
+                            <div>
+                                <label for="expiry-date">Fecha de Expiración</label>
+                                <input class="form-group" type="date" id="expiry-date" name="expiry-date" placeholder="MM/AA">
+                            </div>   
+                               
+                        </section>
     
-                        <h2>Pago en Cuotas</h2>
-                        <label for="cuotas-cant">Cantidad de Cuotas:</label>
+                        <h2>Cantidad de Cuotas</h2>
+                        <label for="cuotas-cant">Elija la cantidad que desea</label>
                         <select id="cuotas-cant">
                             <option value="select" disabled selected>Seleccionar...</option>
                             <option value="3">3 Cuotas</option>
                             <option value="6">6 Cuotas</option>
                             <option value="12">12 Cuotas</option>
                         </select>
-                        <button type="submit">Realizar Pago</button>
                     </form>
+
+                    <div><p id="mensaje-respuesta" class="mensaje hidden"></p></div>
+                    <button id="btn-pagar-tarjeta">Realizar Pago</button>
                 </div>
                 <div>
-                    <h3>Total a Pagar</h3>
+                    <p id="recargo-modal"></p>
+                    <h3 id="titulo-pagar-modal">Total a Pagar</h3>
                     <p id="totalPagoModal">$</p>
                 </div>
             </div>

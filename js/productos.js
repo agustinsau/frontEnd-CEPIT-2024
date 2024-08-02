@@ -259,8 +259,8 @@ function escucharBtnsCompra(){
         carrito.classList.add('show');
         //carrito.classList.toggle('show', 'remove')
 
+        alert("Producto agregado con exito.");
 
-        //AGREGAR FEEDBACK QUE SE AGREGO BIEN EL PRODUCTO AL CARRO
 
       } else {
         alert("Ingrese una cantidad valida.");
@@ -330,9 +330,11 @@ function sumarAlCarrito(id, quantity) {
 //Funciones y Logica Metodos de Pago
 
 const abrirModalPagos = document.getElementById('btn-pagar-carrito');
-const cerrarModalPagos = document.getElementById('btn-cerrar-modal');
+const btnSalirModal = document.getElementById('btn-cerrar-modal');
 const metodosPago = document.getElementById('metodos-pago');
 const totalAPagar = document.getElementById('totalPagoModal');
+const tituloModal = document.getElementById('titulo-pagar-modal');
+const pRecargo = document.getElementById('recargo-modal');
 
 // Recargos segun metodo de pago
 
@@ -340,6 +342,12 @@ const recargoTransf = 0.05;
 const recargoTresCuotas = 0.08;
 const recargoSeisCuotas = 0.12;
 const recargoDoceCuotas = 0.21;
+
+function salirModal(){
+  metodosPago.classList.replace('show', 'remove');
+  metodosPago.close();
+  paymentMethodsToDefaults();
+}
 
 abrirModalPagos.addEventListener('click', () => {
   metodosPago.showModal();
@@ -349,14 +357,10 @@ abrirModalPagos.addEventListener('click', () => {
   carrito.classList.replace('show', 'remove');
 
   //Muestro total actual del carrito en el modal
-  totalAPagar.textContent = `$ ${pCarrito.textContent}`;
+  totalAPagar.textContent = `$${pCarrito.textContent}`;
 });
 
-cerrarModalPagos.addEventListener('click', () => {
-  metodosPago.classList.replace('show', 'remove');
-  metodosPago.close();
-  paymentMethodsToDefaults();
-});
+btnSalirModal.addEventListener('click', salirModal);
 
 // Listeners on change, luego de cargarse el documento
 document.addEventListener('DOMContentLoaded', () => {
@@ -381,18 +385,24 @@ function calcularCuotas(cantCuotas){
   
   montoCuota = (total / cantCuotas) * (1 + interes);
 
-  return montoCuota;
+  pRecargo.innerText = `Pagas con ${cantCuotas} cuotas. Intereses por cuota: ${interes * 100}%.`; //rari aca
+
+  return parseInt(montoCuota); 
 
 }
 
 function mostrarPagoEnCuotas(){
-  let cantCuotas = parseInt(document.getElementById('cuotas-cant').value);
-        
-  let montoCuota = calcularCuotas(cantCuotas);
-
-  //mostrar cant cuotas y monto por cuota en modal
   
-  totalAPagar.textContent = `$ ${parseInt(montoCuota)} `;
+  let cantCuotas = parseInt(document.getElementById('cuotas-cant').value);
+
+  // Si ya se han elegido las cuotas, mostrar cant cuotas y monto por cuota en modal
+  if (cantCuotas){
+    let montoCuota = calcularCuotas(cantCuotas);
+  
+    totalAPagar.textContent = `$${montoCuota}`; 
+    tituloModal.innerText = 'Cantidad a Pagar por Cuota';
+
+  }
 }
 
 function processPayment(metodoPago){
@@ -403,6 +413,7 @@ function processPayment(metodoPago){
       return totalCarrito;
 
     case 'transfer':
+      pRecargo.innerText = `Pagar por transferencia tiene un recargo del ${recargoTransf * 100}%.`;
       return (totalCarrito * (1 + recargoTransf)); 
 
     case 'credit-card': 
@@ -415,6 +426,9 @@ function processPayment(metodoPago){
 }
 
 function selectedPaymentMethod() {
+  limpiarRecargoModal(); // Limpio el p del modal, con info vieja
+  tituloModal.innerText = 'Total a Pagar';
+
   let metodoPago = document.getElementById('payment-method').value;
   console.log(metodoPago)
 
@@ -424,7 +438,7 @@ function selectedPaymentMethod() {
   // Muestra el metodo de pago seleccionado
   if (metodoPago) {
     document.getElementById(`${metodoPago}-form`).classList.remove('hidden');
-    totalAPagar.textContent = `$ ${processPayment(metodoPago)}`; 
+    totalAPagar.textContent = `$${processPayment(metodoPago)}`; 
     console.log(totalAPagar.innerText)
     
   } else {
@@ -432,14 +446,69 @@ function selectedPaymentMethod() {
   }
 }
 
-function paymentMethodsToDefaults(){
-  document.getElementById('payment-method').value = 'select';
-  document.getElementById('cuotas-cant').value = 'select';
-  document.querySelectorAll('.form-pago').forEach(form => form.classList.add('hidden'));
+
+const metodPago = document.getElementById('payment-method');
+const cuotasC = document.getElementById('cuotas-cant');
+const bancoTarj = document.getElementById('banco-tarjeta');
+const numTarj = document.getElementById('card-number');
+const nomTarj = document.getElementById('card-name');
+const expTarj = document.getElementById('expiry-date');
+
+function limpiarRecargoModal(){
+  pRecargo.innerText = '';
 }
 
+function paymentMethodsToDefaults(){
+  document.querySelectorAll('.form-pago').forEach(form => form.classList.add('hidden'));
+  metodPago.value = 'select';
+  bancoTarj.value = 'select';
+  numTarj.value = '';
+  nomTarj.value = '';
+  expTarj.value = '';
+  cuotasC.value = 'select';
+  limpiarRecargoModal();
+  tituloModal.innerText = 'Total a Pagar';
+  
+}
 
-/* Banner Video */
+// Listeners botones reserva/ pago modal
+const msjErrorModal = document.getElementById('mensaje-respuesta');
+
+document.getElementById('btn-pagar-pres').addEventListener('click', hacerReserva);
+document.getElementById('btn-pagar-transf').addEventListener('click', hacerReserva);
+document.getElementById('btn-pagar-tarjeta').addEventListener('click', cardPaymentValidation);
+
+function resetCarrito(){
+  pCarrito.innerText = '0';
+}
+
+function hacerReserva(){
+  mostrarAlertExito();
+  salirModal();
+  resetCarrito();
+}
+
+function mostrarAlertExito(){
+  alert('Operacion Realizada con Exito!');
+}
+
+function cardPaymentValidation(){
+  if (cuotasC.value === 'select' || bancoTarj.value === 'select' || 
+    numTarj.value === '' || nomTarj.value === '' || 
+    expTarj.value === '' || cuotasC.value === 'select'){
+
+      msjErrorModal.textContent = 'Por favor, verifique los campos antes de enviar.';
+      msjErrorModal.classList.replace('hidden', 'error');
+
+  } else {  
+    mostrarAlertExito();
+    msjErrorModal.classList.replace('error','hidden');
+    resetCarrito();
+    salirModal();
+  }
+}
+
+// Banner Video 
 
 function slowdownBanner(){
   const videoBanner = document.getElementById('banner-video');
