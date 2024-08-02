@@ -40,8 +40,9 @@ body, html {
     width: 18rem;
 }
 
-.navbar .brand:hover{
+.navbar .brand:hover {
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .navbar .nav-elements {
@@ -50,6 +51,21 @@ body, html {
 
 .navbar .nav-elements a {
     margin-right: 20px;
+}
+
+#cart-icon{
+    transition: transform 0.5s ease;
+    height: 43px;
+}
+
+.navbar #cart-icon:hover{
+    transform: scale(1.2) rotate(-4deg);
+    cursor: pointer;
+}
+
+.navbar #cart-icon:active {
+    
+    transform: scale(0.9) ;
 }
 
 /* Banners */

@@ -508,6 +508,20 @@ function cardPaymentValidation(){
   }
 }
 
+// Changuito Icon
+
+document.getElementById('cart-icon').addEventListener('click', showCartModal);
+
+function showCartModal(){
+  if(carrito.classList.contains('show')){
+    carrito.classList.replace('show', 'remove');
+  } else {
+    carrito.classList.replace('remove', 'show');
+    carrito.classList.add('show');
+  }
+  
+}
+
 // Banner Video 
 
 function slowdownBanner(){
