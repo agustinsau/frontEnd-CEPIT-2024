@@ -73,7 +73,7 @@ body, html {
 .banner {
     position: relative;
     width: 100%;
-    height: 20vh;
+    height: 22vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -308,8 +308,12 @@ button {
     font-size: medium;
 }
 
-button:hover { /* .card button:hover, .btn-pagar:hover */
+button:hover { 
     background-color: #3a8c6b;
+}
+
+#suscribirse{
+    margin-top: 10px;
 }
 
 .prods-container {
@@ -368,15 +372,21 @@ button:hover { /* .card button:hover, .btn-pagar:hover */
     padding: 5px;
 }
 
-#metodos-pago .cruz-modal{
- /* para la posicionn de la X en el modal pagos */
-}
-
-/* para los metodos de pago */
 .hidden{
     display: none;
 }
 
+.img-metod-pago{
+    height: 200px;
+    padding: 5px;
+}
+
+input.form-group{
+    border: 1px solid #399e73;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 6px;
+}
 
 /* Carrito de Compras */
 
@@ -398,7 +408,7 @@ button:hover { /* .card button:hover, .btn-pagar:hover */
     left: 24vh;
 }
 
- /*   nosotros               */
+ /*   nosotros   asdasd            */
 
  .about-section {
     padding: 20px;
@@ -612,8 +622,7 @@ footer {
 
 /* Selects */
 
-select {
-    
+select { 
     border-color: #399e73; 
     border-radius: 4px; 
     padding: 5px; 
@@ -632,9 +641,9 @@ select option {
     align-items: flex-start;
 }
 
-#card-number.form-group input{
+/* #card-number.form-group input{
     width: 10%; padding-top: 50px;
-}
+} */
 
 
 

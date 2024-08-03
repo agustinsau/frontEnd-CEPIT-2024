@@ -74,6 +74,7 @@
             <div>
                 <div id="presencial-form" class="form-pago hidden">
                     <h2>Pago Presencial</h2>
+                    <img class="img-metod-pago" src="../resources/images/metodosPago/presencial.jpg" alt="Lugar Presencial">
                     <p>Dirígete a la sucursal mas cercana para realizar el pago en efectivo.</p>
                     <p>Reservaremos tu pedido por 2 Horas.</p>
                     <button id="btn-pagar-pres">Reservar Pedido</button>
@@ -81,7 +82,7 @@
             
                 <div id="transfer-form" class="form-pago hidden">
                     <h2>Pago por Transferencia</h2>
-                    <img src="" alt="Imagen Bancaria">
+                    <img class="img-metod-pago" src="../resources/images/metodosPago/transferencia.png" alt="Imagen Bancaria">
                     <p><strong>Nombre Titular: </strong>Carlos Baratito</p>
                     <p><strong>Numero de Cuenta: </strong>1234567890
                     <p><strong>Entidad Bancaria: </strong>Banco Nacion </p>
@@ -91,6 +92,7 @@
             
                 <div id="credit-card-form" class="form-pago hidden">
                     <h2>Pago con Tarjeta de Crédito</h2>
+                    <img class="img-metod-pago" src="../resources/images/metodosPago/tarjeta.jpg" alt="Pago Tarjeta">
                     <form class="credit-card-form" method="dialog">
     
                         <label for="banco-tarjeta">Seleccione su Banco Operador</label>
@@ -103,22 +105,22 @@
                         
                         <section class="datos-tarjeta">
                             <div>
-                                <label for="card-number">Número de Tarjeta</label>
+                                <label for="card-number"><strong>Número de Tarjeta</strong></label>
                                 <input class="form-group" type="number" id="card-number" name="card-number" placeholder="12345678">
                             </div> 
                             <div>
-                                <label for="card-name">Nombre en la Tarjeta</label>
+                                <label for="card-name"><strong>Nombre en la Tarjeta</strong></label>
                                 <input class="form-group" type="text" id="card-name" name="card-name" placeholder="Titular de la tarjeta" onkeydown="return /[a-zA-Z]/i.test(event.key)">
                             </div>    
                             <div>
-                                <label for="expiry-date">Fecha de Expiración</label>
-                                <input class="form-group" type="date" id="expiry-date" name="expiry-date" placeholder="MM/AA">
+                                <label for="expiry-date"><strong>Fecha de Expiración</strong></label>
+                                <input class="form-group" type="date" id="expiry-date" name="expiry-date">
                             </div>   
                                
                         </section>
     
                         <h2>Cantidad de Cuotas</h2>
-                        <label for="cuotas-cant">Elija la cantidad que desea</label>
+                        <label for="cuotas-cant">Elija la cantidad que desee</label>
                         <select id="cuotas-cant">
                             <option value="select" disabled selected>Seleccionar...</option>
                             <option value="3">3 Cuotas</option>

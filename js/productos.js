@@ -5,16 +5,16 @@ const listaComestibles = [
     {
       "id": "c1",
       "nombre": "Leche Entera",
-      "descripcion": "Leche entera de vaca. 1 litro.",
+      "descripcion": "Leche entera de vaca. 1L.",
       "stock": 50,
       "precio": 1000,
-      "image": "../resources/images/productos/comestibles/arroz.png",
+      "image": "../resources/images/productos/comestibles/leche.png",
       "discount": 30
     },
     {
       "id": "c2",
       "nombre": "Arroz Gallo",
-      "descripcion": "Arroz Gallito que no se pega. 1 kg.",
+      "descripcion": "Arroz Gallito que no se pega. 500g.",
       "stock": 30,
       "precio": 3800,
       "image": "../resources/images/productos/comestibles/arroz.png",
@@ -23,19 +23,19 @@ const listaComestibles = [
     {
       "id": "c3",
       "nombre": "Huevos Orgánicos",
-      "descripcion": "Huevos orgánicos, docena.",
+      "descripcion": "HUEBOS DIVU, HUEBOS, 1/2 Docena.",
       "stock": 20,
       "precio": 3000,
-      "image": "../resources/images/productos/comestibles/arroz.png",
+      "image": "../resources/images/productos/comestibles/huevos.png",
       "discount": 0
     },
     {
       "id": "c4",
       "nombre": "Pan Integral",
-      "descripcion": "Hecho con harina de trigo entero.",
+      "descripcion": "Pan tipo Artesano Bimbo.",
       "stock": 20,
       "precio": 1800,
-      "image": "../resources/images/productos/comestibles/arroz.png",
+      "image": "../resources/images/productos/comestibles/pan.png",
       "discount": 30
     },
     {
@@ -44,7 +44,7 @@ const listaComestibles = [
       "descripcion": "Aceite de oliva virgen extra, 500 ml.",
       "stock": 25,
       "precio": 12000,
-      "image": "../resources/images/productos/comestibles/arroz.png",
+      "image": "../resources/images/productos/comestibles/oliva.png",
       "discount": 0
     },
     {
@@ -53,7 +53,7 @@ const listaComestibles = [
       "descripcion": "Pack de 4 hamburguesas.",
       "stock": 20,
       "precio": 10000,
-      "image": "../resources/images/productos/comestibles/arroz.png",
+      "image": "../resources/images/productos/comestibles/burguer.png",
       "discount": 30
     }
 ];
@@ -61,51 +61,57 @@ const listaComestibles = [
 const listaLimpieza = [
     {
         "id": "l1",
-        "nombre": "Detergente Líquido",
-        "descripcion": "Detergente líquido para ropa, 2 litros.",
+        "nombre": "I need a Hero",
+        "descripcion": "I'm holding out for a hero. 3L.",
         "stock": 25,
-        "precio": 3.99,
-        "image": ""
+        "precio": 3200,
+        "image": "../resources/images/productos/limpieza/heroe.png",
+        "discount": 30
     },
     {
         "id": "l2",
         "nombre": "Lavavajillas",
-        "descripcion": "Lavavajillas en gel, 750 ml.",
+        "descripcion": "Cif en gel, 750 ml.",
         "stock": 40,
-        "precio": 2.49,
-        "image": ""
+        "precio": 2000,
+        "image": "../resources/images/productos/limpieza/detergente.png",
+        "discount": 30
     },
     {
         "id": "l3",
         "nombre": "Friegasuelos",
-        "descripcion": "Friegasuelos perfumado, 1.5 litros.",
+        "descripcion": "Limpiador perfumado Ayudin, 900 ml.",
         "stock": 20,
-        "precio": 1.99,
-        "image": ""
+        "precio": 1800,
+        "image": "../resources/images/productos/limpieza/limpiador.png",
+        "discount": 30
     },
     {
         "id": "l4",
         "nombre": "Limpiacristales",
-        "descripcion": "Limpiacristales con amoníaco, 500 ml.",
+        "descripcion": "Limpiacristales ecologico, 750 ml.",
         "stock": 30,
-        "precio": 2.0,
-        "image": ""
+        "precio": 1200,
+        "image": "../resources/images/productos/limpieza/limpiacris.png",
+        "discount": 30
     },
     {
         "id": "l5",
-        "nombre": "Jabón de Manos",
-        "descripcion": "Jabón de manos antibacteriano, 500 ml.",
+        "nombre": "Limpia Manos",
+        "descripcion": "Jabón liquido de manos antibacteriano, 221 ml.",
         "stock": 50,
-        "precio": 1.5,
-        "image": ""
+        "precio": 2000,
+        "image": "../resources/images/productos/limpieza/jabonliquido.png",
+        "discount": 0
     },
     {
         "id": "l6",
         "nombre": "Suavizante de Ropa",
-        "descripcion": "Suavizante para ropa, 2 litros.",
+        "descripcion": "Vivere Clasico, 900 ml.",
         "stock": 20,
-        "precio": 2.5,
-        "image": ""
+        "precio": 1900,
+        "image": "../resources/images/productos/limpieza/vivere.png",
+        "discount": 0
     }
 ];
 
@@ -279,10 +285,12 @@ function actualizarStock(stockSpan, quantity){
   console.log('stock ' + stockSpan.textContent +' cantidad agregada '+ quantity);
 }
 
+// Cruz Carrito
+
+document.querySelector('.cruz-modal').addEventListener('click', showCartModal);
 
 // Carrito de Compras
 const carrito = document.getElementById('carrito');
-
 const pCarrito = document.getElementById('tot-carrito');
 
 function buscarProdPorId(id) { 
@@ -350,14 +358,20 @@ function salirModal(){
 }
 
 abrirModalPagos.addEventListener('click', () => {
-  metodosPago.showModal();
-  metodosPago.classList.remove('remove');
-  metodosPago.classList.add('show');
+  // Si el carrito tiene articulos, muestra modal de pago
+  if(parseInt(pCarrito.innerText) != 0){
+    metodosPago.showModal();
+    metodosPago.classList.remove('remove');
+    metodosPago.classList.add('show');
 
-  carrito.classList.replace('show', 'remove');
+    carrito.classList.replace('show', 'remove');
 
-  //Muestro total actual del carrito en el modal
-  totalAPagar.textContent = `$${pCarrito.textContent}`;
+    //Muestro total actual del carrito en el modal
+    totalAPagar.textContent = `$${pCarrito.textContent}`;
+  } else {
+    alert('No hay productos en el carrito.');
+  }
+  
 });
 
 btnSalirModal.addEventListener('click', salirModal);
@@ -454,6 +468,8 @@ const numTarj = document.getElementById('card-number');
 const nomTarj = document.getElementById('card-name');
 const expTarj = document.getElementById('expiry-date');
 
+const numTarjPattern = /^[0-9]{9}$/;
+
 function limpiarRecargoModal(){
   pRecargo.innerText = '';
 }
@@ -494,10 +510,10 @@ function mostrarAlertExito(){
 
 function cardPaymentValidation(){
   if (cuotasC.value === 'select' || bancoTarj.value === 'select' || 
-    numTarj.value === '' || nomTarj.value === '' || 
-    expTarj.value === '' || cuotasC.value === 'select'){
+    numTarj.value === '' || !numTarjPattern.test(numTarj.value) ||
+    nomTarj.value === '' || expTarj.value === '' || cuotasC.value === 'select'){
 
-      msjErrorModal.textContent = 'Por favor, verifique los campos antes de enviar.';
+      msjErrorModal.textContent = 'Por favor, verifique todos los campos antes de continuar.';
       msjErrorModal.classList.replace('hidden', 'error');
 
   } else {  
