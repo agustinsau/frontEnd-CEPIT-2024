@@ -75,7 +75,7 @@ const listaLimpieza = [
         "stock": 40,
         "precio": 2000,
         "image": "../resources/images/productos/limpieza/detergente.png",
-        "discount": 30
+        "discount": 0
     },
     {
         "id": "l3",
@@ -211,6 +211,7 @@ function createProducts(productsList, divProductos){
     //Si el producto tiene descuento, crea la imagen de % OFF
     if(product.discount > 0){
       divImg.appendChild(createImage('../resources/images/productos/30off.png', 'discount badge', 'discount-badge'));
+      prodCard.classList.add('discount');
     }
 
     // Div para la informacion del producto
@@ -244,7 +245,7 @@ function escucharBtnsCompra(){
 
   comprarBtns.forEach(btn => {
     
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
       console.log('btn apretado con id '+ btn.id);
 
       //capturar el input mas cercano al evento?
@@ -263,13 +264,23 @@ function escucharBtnsCompra(){
 
         carrito.classList.remove('remove');
         carrito.classList.add('show');
-        //carrito.classList.toggle('show', 'remove')
 
-        alert("Producto agregado con exito.");
+        alert("Producto/s Agregado/s con Exito.");
 
+        // Si producto queda sin Stock, 
+        if(quantity == stock){
+          let parentDiv = e.target.closest('.card');
+
+          if (parentDiv.classList.contains('discount')){
+            parentDiv.classList.replace('discount', 'noStock');
+
+          } else {
+            parentDiv.classList.add('noStock');
+          }
+        }
 
       } else {
-        alert("Ingrese una cantidad valida.");
+        alert("Ingrese una Cantidad Valida.");
       }
 
     })
