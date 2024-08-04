@@ -62,3 +62,20 @@ document.getElementById('enviar').addEventListener('click', (event) => {
     }
 
 });
+
+document.getElementById('suscribirse').addEventListener('click', (event) => {
+    let mensajeSubscripcion = document.getElementById('mensaje-suscripcion');
+    let mailAlertas = document.getElementById('alerta-email');
+
+    if (mailAlertas.value === '' || !emailPattern.test(mailAlertas.value)){
+        mensajeSubscripcion.textContent = 'Por favor, verifique bien su Email.';
+
+        mensajeSubscripcion.classList.replace('hidden', 'error');
+        mensajeSubscripcion.classList.replace('exito', 'error');    
+    } else {
+        mensajeSubscripcion.classList.replace('hidden','exito');
+        mensajeSubscripcion.classList.replace('error','exito');
+        mensajeSubscripcion.textContent = 'Te has suscripto Exitosamente!';
+        mailAlertas.value = '';
+    }
+});

@@ -495,6 +495,7 @@ function paymentMethodsToDefaults(){
   cuotasC.value = 'select';
   limpiarRecargoModal();
   tituloModal.innerText = 'Total a Pagar';
+  msjErrorModal.classList.replace('error','hidden');
   
 }
 
