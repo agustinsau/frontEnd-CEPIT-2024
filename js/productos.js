@@ -219,7 +219,7 @@ function createProducts(productsList, divProductos){
 
     let ul = document.createElement('ul');
 
-    ul.appendChild(createLi('Nombre:', product.nombre));
+    ul.appendChild(createLi('Artículo:', product.nombre));
     ul.appendChild(createLi('Descripción:', product.descripcion));
     ul.appendChild(createLiWithSpan('Stock:', product.stock, 'data-id', product.id)); // Este li posee un span para modificar datos en el interior facilmente
     ul.appendChild(createPriceLi(product.discount, product.precio));
