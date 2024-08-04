@@ -63,7 +63,7 @@ document.getElementById('enviar').addEventListener('click', (event) => {
 
 });
 
-//se puede modularizar, se repite codigo
+//se puede modularizar, se repite codigo //
 
 document.getElementById('suscribirse').addEventListener('click', (event) => {
     let mensajeSubscripcion = document.getElementById('mensaje-suscripcion');
@@ -77,7 +77,7 @@ document.getElementById('suscribirse').addEventListener('click', (event) => {
     } else {
         mensajeSubscripcion.classList.replace('hidden','exito');
         mensajeSubscripcion.classList.replace('error','exito');
-        mensajeSubscripcion.textContent = 'Te has suscrito Exitosamente a nuestras Alertas!';
+        mensajeSubscripcion.textContent = 'Te has suscrito Exitosamente al sistema de Alertas!';
         mailAlertas.value = '';
     }
 });
